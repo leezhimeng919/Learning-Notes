@@ -1,0 +1,14 @@
+动画基础
+用动画丰富网页的浏览效果
+
+1.位置
+position（static/fixed/relative/absolute）
+
+2.时间
+variable = setTimeout("function",interval)
+
+clearTimeout(variable)
+
+parseInt可以吧字符串里的数值信息提取出来
+(parseInt("39 steps")，返回的是39)
+parseFloat(string)

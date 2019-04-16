@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas{
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var myCanvas = document.querySelector('canvas')
+		var ctx = myCanvas.getContext('2d')
+		
+		/*绘制一大一小两个正方形*/
+		ctx.moveTo(100,100)
+		ctx.lineTo(300,100)
+		ctx.lineTo(300,300)
+		ctx.lineTo(100,300)
+		ctx.closePath()
+
+		ctx.moveTo(150,150)
+		ctx.lineTo(150,250)
+		ctx.lineTo(250,250)
+		ctx.lineTo(250,150)
+		ctx.closePath()
+		/*非零环绕规则：
+		看一块区域是否填充
+		从这个区域拉一条直线
+		看和这条直线相交的轨迹
+		如果顺时针轨迹+1
+		如果逆时针轨迹-1
+		所有的轨迹的值计算出来
+		如果是0那么填充
+		如果不是0那么不填充
+
+		*/
+		/*填充*/
+		ctx.fill()
+	</script>
+</body>
+</html>

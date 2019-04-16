@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas{
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var myCanvas = document.querySelector('canvas')
+		var ctx = myCanvas.getContext('2d')
+		
+		ctx.moveTo(100,100);
+		ctx.lineTo(200,100);
+		ctx.lineTo(200,200);
+		/*
+		起始点和结束点不能完全闭合
+		使用canvas的自动闭合 
+		*/
+		ctx.closePath();
+		//ctx.lineTo(100,100);
+		ctx.lineWidth = 10
+		ctx.stroke()
+		//ctx.fillStyle = "red"
+		//ctx.fill();
+	</script>
+</body>
+</html>

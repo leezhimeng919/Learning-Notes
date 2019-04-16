@@ -1,0 +1,6 @@
+7.动态创建标记
+	传统技术:document.write  innerHTML
+	DOM:createElement createTextNode appendChild和insertBefore
+	(网页的结构由标记负责创建，js函数只用来改变某些细节而不改变其底层结构，js也可以用来改变网页的结构和内容)
+
+	document.write 最大的缺点是他违背了“行为应该与表现分离”的原则。

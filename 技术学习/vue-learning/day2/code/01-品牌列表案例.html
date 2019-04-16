@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-widtd,initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title></title>
+<script src="./lib/vue-2.4.0.js"></script>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+	<div id="app">
+		<table class="table table-bordered table-hover table-striped">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">添加品牌</h3>
+				</div>
+				<div class="panel-body">
+					<div class="panel-body form-inline">
+						<label>
+							Id:
+							<input type="text" class="form-control" v-model="id">
+						</label>
+
+						<label>
+							Name:
+							<input type="text" class="form-control" v-model="name">
+						</label>
+						
+						<input type="button" value="add" class="btn btn-primary" @click="add">
+						
+						<label>
+							搜索名称关键字：
+							<input type="text" class="form-control" v-model="keywords">
+						</label>
+
+					</div>
+				</div>	
+			</div>	
+			
+
+
+
+
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Ctime</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- 
+					之前，v-for中的数据，都是直接从data上的list中直接渲染过来的
+					现在，我们自定义了一个search方法，同时，吧所有的关键字，通过传参的形式，传递给了search方法
+					在search方法内部，通过执行for循环，吧所有符合搜索关键字的的
+
+				 -->
+				<tr v-for="item in search(keywords)" :key="item.id">
+					<td>{{ item.id }}</td>
+					<td>{{ item.name }}</td>
+					<td>{{ item.ctime }}</td>
+					<td>
+						<a href="" @click.prevent="del(item.id)">删除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    <script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				id: '',
+				name: '',
+				keywords: '',
+				list: [
+				{
+					id: 1, name: 'benz', ctime: new Date()
+				},
+				{
+					id: 2, name: 'BMW', ctime: new Date()
+					
+				}
+				]
+			},
+			methods: {
+				add(){
+					if(this.id === '' || this.name === '') return;
+					this.list.push({
+						id: this.id,
+						name: this.name,
+						ctime: new Date() 
+					})
+
+					this.id = this.name = ''
+				},
+				del(id){
+					/*
+						分析
+						1.如何根据Id找到要删除这一项的索引
+						2.如果找到索引了，直接调用数组的splice方法
+					*/
+					this.list.some((item,i,arr)=>{
+						if(item.id === id){
+							this.list.splice(i,1)
+							console.log(arr)
+							//在 数组的some方法中，如果return true就会立即终止这个数组的some循环
+							return true
+						}
+					})
+
+			/*		var index = this.list.findIndex(item =>{
+						if(item.id === id){
+							return true ;
+						}
+					})
+					//console.log(index)
+
+					this.list.splice(index,1)*/
+				},
+				search(keywords){
+					/*方法一
+
+					var newList = []
+					this.list.forEach(item=>{
+						if(item.name.indexOf(keywords) !== -1){
+							newList.push(item)
+						}
+					})
+					return newList*/
+					//方法二
+					return this.list.filter(item => {
+						//if(item.name.indexOf(keywords) !== -1)
+						//ES6中，为字符串提供了一个新方法，叫做String.prototype.includes('要包含的字符串')
+						if(item.name.includes(keywords)){
+							return item
+						}
+					})
+				}
+			}
+		})
+	</script>
+</body>
+</html>

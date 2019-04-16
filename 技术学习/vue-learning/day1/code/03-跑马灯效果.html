@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>跑马灯</title>
+		<script src="./lib/vue-2.4.0.js"></script>
+
+</head>
+<body>
+
+	<div id="app">
+		<input type="button" value="浪起来" @click="lang">
+		<input type="button" value="低调" @click="wen">
+		<h4 v-text="msg"></h4>
+	</div>
+	<script>
+		//注意：vm实例，会监听自己身上data中发生的变化
+		var vm = new Vue({
+			el:'#app',
+			data: {
+				intervalId:null,
+				msg:'猥琐发育！！别浪~~~~'
+			},
+			methods: {
+				lang(){
+					//console.log(this.msg)
+					if(this.intervalId !== null) return;
+					this.intervalId =  setInterval( ()=> {
+					var start = this.msg.slice(0,1)
+					var end = this.msg.slice(1)
+					this.msg = end + start
+					},100)
+					
+					//varl = setTimeout(this.lang,100)
+				},
+				wen() {
+					clearInterval(this.intervalId)
+					this.intervalId = null
+				}
+			}
+		})
+	
+	
+	
+		/*
+		分析：
+		1.给浪起来按钮，绑定一个点击时间 
+		2.在按钮的事件处理函数中，写相关的业务逻辑代码：拿到msg字符串，然后调用字符串的substring来进行字符串的截取操作，吧第一个字符截取出来，放到最后一个位置即可
+		3.为了实现点击一下按钮，自动截取的功能，需要把2步骤中的代码，放到一个定时器中
+	
+	
+		*/
+	</script>
+</body>
+</html>

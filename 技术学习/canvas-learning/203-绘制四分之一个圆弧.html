@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var myCanvas = document.querySelector('canvas');
+    var ctx = myCanvas.getContext('2d');
+    /*
+    绘制圆弧
+    确定圆心 2
+    确定半径 1
+    确定起始绘制的位置和结束绘制的位置 确定弧的长度和位置 2
+    取得绘制的方向 1
+    */
+    var w = ctx.canvas.width;
+    var h = ctx.canvas.height;
+
+    ctx.arc(w/2,h/2,150,0,Math.PI /6,true);
+    ctx.stroke()
+
+
+</script>
+</body>
+</html>

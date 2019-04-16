@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            margin: 100px
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var myCanvas = document.querySelector('canvas');
+    var ctx = myCanvas.getContext('2d');
+/*
+1.在画布中心绘制一段文字
+2.申明一段文字
+3.确定画布的中心
+4.画一个十字架在画布的中心
+5.绘制  文本
+注意：起点位置在文字的左下角
+有文本的属性：字体、尺寸、左右对齐方式、垂直对齐方式
+
+*/
+    var str = '哈喽，沃德';
+
+    var w = ctx.canvas.width;
+    var h = ctx.canvas.height;
+
+    ctx.beginPath();
+    ctx.moveTo(0,h / 2 - 0.5);
+    ctx.lineTo(w,h / 2 - 0.5 );
+    ctx.moveTo(w / 2 - 0.5 , 0);
+    ctx.lineTo(w / 2 - 0.5 , w);
+    ctx.strokeStyle = '#eee'
+    ctx.stroke();
+
+    ctx.beginPath();
+    var x0 = w/2
+    var y0 = h/2
+    ctx.strokeStyle = '#000'
+    ctx.font ='40px Microsoft YaHei'
+    //ctx.textAlign = 'end'
+    ctx.direction = 'ltr'
+    ctx.strokeText(str,x0,y0)
+
+</script>
+</body>
+</html>

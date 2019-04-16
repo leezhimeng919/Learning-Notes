@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+var numJewelsInStones = function(J, S) {
+    if(J.length > 50||S.length > 50) 
+        return false;
+    let Jarr = J.split('');
+    let set = new Set(Jarr);
+    if(set.size !== Jarr.length)
+        return false;
+    let num = 0;
+    Jarr.map(e=>{
+        let r = '/'+e+'/g';
+        let matchJewels = S.match(eval(r))
+        if(matchJewels === null)
+           return false
+        num += matchJewels.length;
+    })
+    return num;
+};
+console.log(numJewelsInStones('zZ','ZZ'))
+  </script>
+</body>
+</html>

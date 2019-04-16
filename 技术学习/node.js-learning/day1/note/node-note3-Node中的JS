@@ -1,0 +1,18 @@
+Node中的JS
+	·ES
+		没有DOM/BOM
+	·核心模块
+		Node为JS提供了很多服务器级别的API，这些API
+		绝大部分都被包装到了一个具名的核心模块中了。
+			例如文件操作的fs核心模块，http服务构建的http模块，
+				path路径操作模块、os操作系统信息模块等等等。
+				
+		核心模块API
+		https://nodejs.org/dist/latest-v10.x/docs/api/
+		以后要是说到这个模块是核心模块，马上就要想到使用它就必须require它：
+
+		var fs = require('fs');
+		var http = require('http');
+	·第三方模块
+	·用户自定义模块
+

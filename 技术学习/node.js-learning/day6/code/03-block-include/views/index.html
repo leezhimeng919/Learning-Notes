@@ -1,0 +1,21 @@
+{{extend './layout.html'}}
+
+{{ block 'head' }}
+<style>
+	div{
+		background-color: skyblue;
+	}
+</style>
+{{/block}}
+
+{{ block 'content' }}
+<div>
+	<h1>index {{name}}</h1>
+</div>
+{{/block}}
+
+{{ block 'script' }}
+<script type="text/javascript">
+	window.alert('self js')
+</script>
+{{/block}}

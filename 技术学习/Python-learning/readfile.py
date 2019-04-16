@@ -1,0 +1,11 @@
+#open方法返回一个file对象
+helloFile = open('./aaa.py','w')
+#print(helloFile.readlines())
+#helloFile.read()
+helloFile.write('nihaoma\n')
+helloFile.close()
+helloFile = open('./aaa.py','a')
+helloFile.write('wobuhao')
+helloFile.close()
+helloFile = open('aaa.py')
+print(helloFile.read())

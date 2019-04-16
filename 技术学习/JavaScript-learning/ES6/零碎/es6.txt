@@ -1,0 +1,9 @@
+
+函数的rest参数和拓展
+promise使用
+module.exports和es6 import/export的使用
+
+变量提升
+	将变量声明提升到它所在作用域的最开始的部分
+函数提升
+	函数声明才存在函数提升

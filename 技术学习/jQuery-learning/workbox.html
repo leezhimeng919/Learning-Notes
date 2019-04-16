@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript" src="sw.js"></script>
+<script type="text/javascript">
+	
+
+	if("ServiceWorker" in window){
+
+		//console.log("1");
+
+		navigator.ServiceWorker.register("sw.js")
+		.then(function(registration){
+			console.log("ServiceWorker 登记成功,范围",registration.scope);
+		}).catch(()=>{
+			console.log("ss")
+		})
+
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.active-btn{
+ 	display: inline-block; 
+    background-color: #cd0000;
+}
+
+.active-btn:active {
+    background-color: #ae0000;
+}

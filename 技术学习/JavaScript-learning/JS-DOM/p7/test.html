@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>test</title>
+	<script type="text/javascript" src="function.js"></script>
+	<script type="text/javascript" src="example.js"></script>
+
+</head>
+<body>
+	<div id="testdiv">
+		<p>This is  <em>my</em> content.</p>
+	</div>
+	<script>
+		
+		var yideng = {
+			bar:function(){
+				return this.baz
+			},
+			baz:1
+		};
+		(function(){
+			console.log(arguments[0]);
+		})(yideng.bar)
+
+		console.log(yideng.bar());     
+		var obj={
+    			name:"dddd",
+    			say:function(){
+    				return this;
+    			}
+    		};
+
+    		(function(){
+			console.log(arguments);
+		})(obj.say());
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>Image Gallery</title>
+<script type="text/javascript" src="imgGallery.js"></script>
+<link rel="stylesheet" type="text/css" href="layout.css" />
+
+</head>
+<body>
+	<h1>Snapshots</h1>
+	<ul id="imagegallery">
+		<li>
+			<a href="images2.0/alarm.png" title="A alarm display">alarm</a>
+		</li>
+		<li>
+			<a href="images2.0/zoominfo.png" title="A zoominfo display" >zoominfo</a>
+		</li>
+		<li>
+			<a href="images2.0/powerInfo.png" title="A powerinfo display">powerinfo</a>
+		</li>
+
+	</ul>
+ <img id="placeholder" src="images2.0/product.png" alt="hello world!"  onclick="location.href='ImageGallary.html'"  onmousemove="location.href='images2.0/powerInfo.png'" />
+<p id="description">Choose an image</p>
+
+<script>
+	addLoadEvent(prepareGallery);
+
+</script>
+</body>
+</html>

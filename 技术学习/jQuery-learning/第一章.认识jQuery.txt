@@ -1,0 +1,90 @@
+规范
+	1.链式操作
+		1.对于同一个对象不超过3个操作的，可以直接写成一行
+		2.对于同一个对象的较多操作，建议每行写一个操作
+		3.对于多个对象的少量操作，可以每个对象写一行，如果涉及子元素，可以考虑适当的缩进。
+
+	2.为代码添加注释
+	
+jQuery对象转成DOM对象
+	1.[index]
+	2.get(index)
+DOM转jQuery
+	$()
+解决js库的冲突
+	1.jQ放最前面
+		$写成jQuery
+	2.jQ放后面
+		jQuery.noConflict()
+
+选择器
+	基本选择器：.类，#ID，*，标签元素，合并
+	层次选择器：
+		祖先后代：空格
+		父子：>
+		前后一同辈：+
+				替代：.next()
+		前后所有同辈：~
+				替代：.nextAll()	  选取之后的所有同辈。
+				拓展：.siblings() 选取所有同辈，无论前后位置。
+	过滤选择器：
+		1.基本过滤选择器
+			：first
+			：last
+			：not(selector)
+			 :even
+			 :odd
+			 :eq(index) //index从0开始
+			 :gt(index)
+			 :lt(index)
+			 :header
+			 :animated
+			 :focus
+		2.内容过滤选择器
+			：contains(text)
+			 :empty
+			 :has(selector)
+			 :parent
+		3.可见性过滤选择器
+			：hidden
+				拓展 .show(time)
+			：visible
+		4.属性过滤选择器
+			[attribute]
+			[attribute=value]
+			[attribute!=value]
+			[attribute^=value]  //value开头
+			[attribute$=value]	//value结尾
+			[attribute*=value]	//含有value
+			[attribute|=value]	//等于value或者value-前缀
+			[attribute~=value]	//空格分隔的值中包含字符value
+			[attribute1][attribute2][attributeN]	//多个要求合并
+		5.子元素过滤选择器
+			：nth-child()
+				even
+				odd
+				index 索引从1开始
+				3n   n从1开始
+				3n+1
+				拓展：eq(index)只匹配一个元素，从0开始
+			：first-child 
+			：last-child
+			：only-child
+		6.表单对象属性过滤选择器
+			:enabled
+			:disabled
+			:checked
+			:selected
+
+	表单选择器
+		:input   //选取所有
+		:text
+		:password
+		:radio
+		:checkbox
+		:submit
+		:reset
+		:image
+		:button
+		:file
+		:hidden

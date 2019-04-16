@@ -1,0 +1,20 @@
+html,body{
+	.box{
+		width: 220px;
+		height: 120px;
+
+		//默认情况下，webpack无法处理css文件中的url地址，不管是图片还是字体库，只要是URL地址，都处理不了
+		background: url('../images/透明抠图.png')
+		background-size: cover
+	}
+
+	.box2{
+		width: 220px;
+		height: 120px;
+
+		//默认情况下，webpack无法处理css文件中的url地址，不管是图片还是字体库，只要是URL地址，都处理不了
+		background: url('../images2/透明抠图.png')
+		background-size: cover
+	}
+}
+

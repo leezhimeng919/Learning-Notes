@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas{
+			border: 1px solid #ccc;
+		}
+
+		.linearGradient{
+			width: 400px;
+			height: 100px;
+			background-image: linear-gradient(to right,pink,blue)
+		}
+	</style>
+</head>
+<body>
+	<div class="linearGradient"></div>
+	<canvas width="600" height="400"></canvas>
+	<script>
+		var myCanvas = document.querySelector('canvas');
+		var ctx = myCanvas.getContext('2d');
+		
+		/*线性渐变
+
+		要素：
+		方向
+		起始颜色
+		结束颜色
+
+		*/
+
+		var linearGradient = ctx.createLinearGradient(100,100,500,100);
+		linearGradient.addColorStop(0,'pink');
+		linearGradient.addColorStop(0.5,'black');
+		linearGradient.addColorStop(1,'blue');
+		ctx.fillStyle = linearGradient;
+
+		ctx.fillRect(100,100,400,100);
+	</script>
+</body>
+</html>

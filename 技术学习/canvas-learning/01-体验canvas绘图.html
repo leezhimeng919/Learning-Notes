@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas{
+			border: 1px solid #ccc;
+			/*不建议在 样式设置尺寸*/
+		}
+	</style>
+</head>
+<body>
+	<!-- 画布是白色的，而且默认是300*150 -->
+	<!-- d -->
+	<canvas width="600" height="400"></canvas>
+	<canvas width="600" height="400"></canvas>
+
+	<script>
+		//获取元素
+		var myCanvas = document.querySelectorAll("canvas");
+		
+		var ctx = myCanvas[1].getContext('2d');
+
+		ctx.moveTo(100,100);
+		ctx.lineTo(200,100);
+		ctx.stroke();
+	</script>
+</body>
+</html>

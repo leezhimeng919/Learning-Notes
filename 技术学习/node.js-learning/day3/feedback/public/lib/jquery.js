@@ -1,0 +1,1 @@
+window.alert('wo shi jquery')
