@@ -1,5 +1,5 @@
 ## 面向对象的程序设计
-###理解对象
+### 理解对象
 - 属性类型：为了实现JavaScript引擎，在JavaScript中不能直接访问它们
     + 数据属性：包含一个数据值的位置，在这个位置可以读写值，有4个描述行为特性的描述符
         * `[[Configurable]]`表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性、能否把属性修改为访问器属性
@@ -7,19 +7,19 @@
         * `[[Enumerable]]`表示能否通过for——in循环返回属性
         * `[[writable]]`表示能否修改属性的值
         * `[[value]]`表示这个属性的数据值
-        * Object.defineProperty():修改属性默认的特性
-            - 接受三个参数：属性所在对象，属性名，一个描述符对象
-            - 描述符对象的属性为：configurable、enumerable、writable、value
     + 访问器属性：不包含数据值，包含一对getter和setter函数(非必需)
         * `[[Configurable]]`同上
         * `[[Enumerable]]`同上
         * `[[Get]]`在读取属性时调用的函数。默认值undefined
         * `[[Set]]`在写入属性时调用的函数。默认值undefined
         * 使用方式同数据属性，使用访问器属性的常见方式是设置一个属性的值会导致其他属性发生变化。
-- 定义多个属性：Object.defineProperties()
+    + `Object.defineProperty()`:修改一个属性默认的特性
+        * 接受三个参数：属性所在对象，属性名，一个描述符对象
+        * 描述符对象的属性为：configurable、enumerable、writable、value
+- 定义多个属性：`Object.defineProperties()`
     + 接收两个参数:属性所在对象，属性名和描述符对象的键值对对象
     + 所有的属性都是在同一时间创建的
-- 读取属性的特性:Object.getOwnPropertyDescriptor()
+- 读取属性的特性:`Object.getOwnPropertyDescriptor()`
     + 接收两个参数：属性所在对象、要读取其描述符的属性名
     + 返回值是一个对象，对象的属性视数据属性和访问器属性而不同
 
@@ -27,25 +27,112 @@
 - 工厂模式
 - 构造函数模式
     + 构造函数特点
-        * 没有显示的创建对象 new Object()
-        * 直接将属性和方法赋给了this对象
-        * 构造函数没有return语句
-    + 用new 构造函数创建实例，会经历4个步骤
+        * 没有显式的创建对象 `new Object()`
+        * 直接将属性和方法赋给了`this`对象
+        * 构造函数没有`return`语句
+    + 用 `new` 构造函数创建实例，会经历4个步骤
         * 创建一个新对象
         * 将构造函数的作用域赋给新对象(为了this指向新对象)
         * 执行构造函数中的代码
         * 返回新对象
-    + 实例名.constructor == 构造函数名      //true
-    + 实例名 instanceof 构造函数名/Object   //true
+    + `实例名.constructor == 构造函数名      //true`
+    + `实例名 instanceof 构造函数名/Object   //true`
     + 问题：每个方法都要在每个实例上重新创建一遍
-        * person1.方法 == person2.方法      //false
+        * `person1.方法 == person2.方法    //false`
         * 可以把方法的定义转移到构造函数外部，而在构造函数内部，将方法属性设置成等于这个全局方法(保存指向这个全局方法的指针)
             - 这样做多了就会使封装性减弱
 - 原型模式
+    + 原型模式的特点
+        * 创建的每一个函数都有一个`prototype`属性，保存着指向一个对象的指针，这个对象的用途是包含所有实例 **可共享**的属性和方法。
+        * `prototype`是通过调用构造函数而创建的那个实例的原型对象，可以不必在构造函数中定义对象实例的信息
+    + **原型对象**
+        * `Function.prototype`:每创建一个函数，就会创建一个prototype属性，该属性指向函数的原型对象
+        * `Function.prototype.constructor`:所有的原型对象会自动获取一个constructor属性，指向prototype属性所在函数
+            - `Person.prototype.constructor == Person`
+        * `实例.__proto__`:当调用构造函数创建一个实例后，这个实例中会包含一个指向构造函数原型对象的指针`[[prototype]]`，在浏览器上是的体现是每个实例对象上有一个 `__proto__`属性
+        * 总结：实例的属性中会有`__proto__`属性指向原型对象，构造函数中会有`prototype`属性指向原型对象，原型对象中会有`constructor`属性指向构造函数
+        * `isPrototypeOf()`
+            - Person.prototype.isPrototypeOf(person1) //true
+        * `Object.getPrototypeOf()`
+            - Object.getPrototypeOf(person1) == Person.prototype //true
+        * 对象实例共享原型所保存的属性和方法的原理：当读取某个对象的某个属性时
+            - 首先会搜索对象实例本身，如果找到给定的属性或方法名，则返回
+            - 若没找到，则对对象实例的原型对象进行第二次搜索，如果找到，则返回
+        * `hasOwnProperty()`：检测一个属性是在实例中还是在原型中。该方法继承自Object
+            - person1.hasOwnProperty("name")    //false  表示属性在原型中
+    + 原型与in操作符
+        * `in`：无论是实例本身还是原型的属性，只要能访问就为true
+            - "name" in person  //true
+        * `for-in`:返回的是所有可通过对象访问的，enumerated的属性
+            - 包括存在于实例的属性，也包括存在与原型的属性
+            - 会屏蔽原型中不可枚举的属性(即[[enumerable]]设置为false的属性)，但实例属性覆盖该原型属性后是可以的
+            - 所有开发人员定义的属性都是可枚举的 
+        * `Object.keys(原型对象)`:返回一个所有可枚举属性的字符串数组
+            - Object.keys(Person.prototype)     //name,age,job,sayName
+        * `Object.getOwnPropertyNames(原型对象)`：返回所有属性的字符串数组
+            - Object.getOwnPropertyNames(Person.prototype)  //constructor,name,age,job,sayName
+    + 对象字面量方式重写原型对象
+        * 重写原型就切断了现有实例与新原型的联系
+        * 新原型的`constructor`不再指向`Person`,而是`Object`。因为重写了原型对象，它的constructor属性也就变成了新对象的构造函数Object
+            - person1 instanceof Person //true
+            - person1.constructor == Person //false
+        * 解决方法
+            - 对象字面量中加一条`constructor : Person,`。但是会产生一个新的问题：constructor变成可枚举的属性。
+            - `Object.defineProperty`
+            ```
+            Object.defineProperty(Person.prototype, "constructor", {
+                enumerable : fasle,
+                value : Person
+             });
+            ```
+    + 原型的动态性
+        * 在通过构造函数创建实例之后修改原型对象
+            - 对原型对象内部做任何修改都能够立即从实例上反映出来
+            - 如果修改的是整个原型对象，则不具有动态性
+                + 重写原型就切断了原本原型和构造函数之间的联系。
+                + 此时构造函数的prototype属性指向重写后的原型。
+                + 而先前创建的实例中的指针仅指向重写前的原型，而不指向重写后的原型
+    + 原生对象的原型
+        * 原生引用类型(Object、Array、String等)都在其构造函数的原型上定义了方法
+        * 不推荐在原生对象的原型上定义新方法
+    + 原型对象的问题
+        * 在修改基本类型的属性时，问题不大，因为同名属性会直接覆盖
+        * 在修改包含引用类型值的属性时，问题很大，所有实例中的属性都会做出修改
+- 组合使用构造函数模式和原型模式
+    + 构造函数模式用于定义实例属性
+    + 原型模式用于定义方法和共享属性
+    + 优点：
+        * 支持向构造函数传递参数
+        * 每个实例都会有自己的一份实例属性副本
+        * 共享着方法的引用，最大限度节省内存
+- 动态原型模式
+    + 把所有信息都封装在构造函数中，而仅在必要的情况下(第一次被调用时)通过在构造函数中初始化原型
+    ```
+    if (typeof this.sayName != "Function"){//语句检查可以是任何属性或方法
+        Person.prototype.sayName = Function(){//不要用对象字面量方式重写原型对象
+            return this.name;
+        }
+    }
+    ```
+
+- 寄生构造函数模式
+    + 类似工厂模式：除了使用new操作符和把包装函数称之为构造函数之外和工厂模式一模一样
+    + 优点
+        * 可以重写调用构造函数时return的值。普通构造函数只能返回新对象实例
+        * 可以用来创建有额外方法的引用类型，如创建一个类似Array的构造函数
+    + 缺点
+        * 顾名思义，寄生。返回的对象与构造函数和构造函数的原型之间没有关系
+    + 不推荐
+- 稳妥构造函数模式
+    + 稳妥对象：没有公共属性，其方法不引用this关键字
+    + 适用于不允许使用this和new的安全环境中
+    + 类似寄生构造函数模式;与寄生构造函数模式的区别：
+        * 新创建对象的实例方法不引用this
+        * 不使用new操作符调用构造函数
 
 
-##Json
-###语法
+## Json
+### 语法
 - 简单值
     + 使用与JavaScript相同的语法，可以在Json中表示字符串、数值、布尔值和null。
     + JSON不支持JavaScript中的特殊值undefined
@@ -55,13 +142,13 @@
     + 数组也是一种复杂数据类型，表示一组有序的值的列表，可以通过数值索引来访问其中的值。数组的值也可以是任意类型————简单值、对象或数组
     + JSON不支持变量、函数或对象实例，它就是一种表示结构化数据的格式，虽然与JavaScript中表示数据的某些语法相同，但它并不局限于JavaScript的范畴。
 
-####简单值
+#### 简单值
 - 数值：5
 - 字符串："Hello world!"
     + JSON字符串必须使用双引号，单引号会导致语法错误
 - 布尔值和null也是有效的JSON形式
 
-####对象
+#### 对象
 - Javascript中的对象字面量：
 ```Javascript
         var person = {
@@ -80,14 +167,14 @@
     + 首先，没有声明变量(JSON中没有变量的概念)
     + 其次，没有末尾的分号
 
-####数组
+#### 数组
 - JavaScript中的数组字面量
     + var values = [25,"h1",true];
 - JSON中
     + [25,"h1",true]
 
-###解析与序列化
-####JSON对象
+### 解析与序列化
+#### JSON对象
 - 早期的JSON解析器基本上就是使用JavaScript的eval()函数。由于JSON是JavaScript语法的子集，因此eval()函数可以解析、解释并返回JavaScript对象和数组
 - JSON对象有两个方法
     + stringify()和parse()
@@ -106,7 +193,7 @@
         var bookCopy = JSON.parse(jsonText);
 ```
 
-####序列化选项
+#### 序列化选项
 - JSON.stringify()除了要序列化的JavaScript对象外，还可以接收另外两个参数，这两个参数用于指定以不同的方式序列化JavaScript对象
     + 过滤器：可以是一个数组，也可以是一个函数
     + 选项：表示是否在JSON字符串中保留缩进。
@@ -203,8 +290,8 @@
                 console.log(bookCopy.releaseDate.getFullYear());
     ```
 
-##Ajax与Comet
-###XMLHttpRequest对象
+## Ajax与Comet
+### XMLHttpRequest对象
     ```Javascript
     function createXHR(){
         if(typeof arguments.callee.activeXString != "string"){
@@ -225,7 +312,7 @@
     }
     ```
 
-####XHR的用法
+#### XHR的用法
 - open(),它接受3个参数
     + 要发送的请求的类型
     + 请求的URL:相对于执行代码的当前页面(也可以使用绝对路径)
