@@ -515,8 +515,23 @@
 
 <a id="location对象"></a>
 ### location对象
+- 概念
+    + 最有用的BOM对象之一
+    + 提供了当前窗口中加载文档的有关信息，还提供了一些导航功能
+    + 即使window对象的属性也是document对象的属性
+        * `window.location == document.location`
 - 查询字符串参数
+    + `location.search`返回从问号到URL末尾的所有内容
+    + 想逐个访问每个查询字符串的参数，可自定义函数截取字符串
 - 位置操作
+    + `location.assign(URL)`立即打开新URL并在浏览器的历史记录中生成一条记录
+        * `window.location = URL`
+        * `location.href = URL`是最常用改变浏览器位置的操作
+        * 这两行代码和显式调用assign()的效果一样
+    + `location.replace(URL)`会导致浏览器位置改变，但不会再历史记录中生成新纪录
+    + `location.reload()`从浏览器缓存中重新加载当前显示页面
+        * `location.reload(true)`强制从服务器重新加载
+        * 最好将reload放在代码最后一行
 
 <a id="navigator对象"></a>
 ### navigator对象
