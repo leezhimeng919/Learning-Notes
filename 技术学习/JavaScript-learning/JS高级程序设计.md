@@ -433,13 +433,85 @@
     + window对象扮演中ES中Global对象的角色
     + `var a` 和 `window.a` 的区别
         * `var`语句声明的全局变量不能通过delete操作符删除。因为使用`var`语句添加的`winodw`属性有一个名为`[[configurable]]`的特性，这个特性值被设置为false
-    + 尝试访问未声明的变量会抛错，这时可以通过`window.unknowValue`查看该变量是否存在,未声明则值为undefined
+    + 尝试访问未声明的变量会抛错，这时可以通过`window.unknowValue`查看该变量是否存在,未声明则值为undefined.
 - 窗口关系及框架
-    + 
+    + <frame>标签已被新标准废弃，使用<iframe></iframe>
+    + 使用框架会使浏览器存在多个Global对象
+    + `top`指向最高层的frame,即浏览器窗口window
+    + `parent`指向当前frame的上层frame
+    + `window == self`引入`self`是为了和`top`、`parent`对应起来
 - 窗口位置
+    + `screenLeft`/`screenTop`IE、Safari、Opera、Chrome
+    + `screenX`/`screenY`FireFox、Safari、Chrome
+    + 跨浏览器取的窗口位置
+```
+    var winPosLeft = (typeof window.screenLeft == 'number') ? 
+                        window.screenLeft : window.screenX;
+    var winPosTop = (typeof window.screenTop == 'number') ? 
+                        window.screenTop : window.screenY;
+```
+    + `moveTo(0,100)`窗口移动到新位置的xy值
+    + `moveBy(0,100)`窗口向水平和垂直方向移动的像素值
+        * 默认被禁用，不适用于frame，只能对最外层window对象使用
 - 窗口大小
+    + 浏览器窗口内容区域宽高，包括水平/垂直滚动条(如果有的话)
+        * `innerWidth`
+        * `innerHeight`
+    + 浏览器窗口的宽高
+        * `onnerWidth`
+        * `onnerHeight`
+    + `document.documentElement.clientWidth`(后面补充)
+    + `document.body.clientWidth`混杂模式
+    + `resizeTo(0,100)`
+    + `resizeBy(0,100)`
+        * 使用方法同moveTo/moveBy
 - 导航和打开窗口
+    + `window.open()`导航到一个特定的URL或者打开一个新的浏览器窗口
+        * 可以接收4个参数
+            - 要加载的URL
+            - 窗口目标
+                + 自定义的窗口名或frame名
+                + `_parent`
+                + `_self`
+                + `_top`
+                + `_blank`
+            - 一个特性字符串
+                + 在不打开新窗口的情况下，会忽略这个参数
+                + `fullscreen`是否最大化
+                + `height`新窗口高度
+                + `left`新窗口左坐标
+                + `location`是否在浏览器窗口中显示地址栏
+                + `menubar`是否在浏览器窗口中显示菜单栏
+                + `resizable`是否可以通过拖动浏览器窗口的边框改变大小
+                + `scrollbars`是否允许滚动
+                + `status`是否显示状态栏
+                + `toolbar`是否显示工具栏
+                + `top`新窗口的上坐标
+                + `width`新窗口的宽度
+            - 一个表示新页面是否取代浏览器历史记录当中加载页面的布尔值
+        * 返回值是一个指向新窗口的引用
+    + `新窗口引用.close()`关闭新打开的窗口
+    + `新窗口引用.closed`检测是否关闭//true
+    + `新窗口引用.opener`保存着原始窗口对象
 - 间歇调用和超时调用
+    + `setTimeout()`指定时间后执行代码
+        * 第一个参数是要执行的代码
+            - 可以是一个包含JS代码的字符串，不建议
+            - 可以是一个函数
+        * 第二个参数是以毫秒表示的时间
+        * 返回值是一个数值ID,表示这个超时调用，这个ID是这个计划执行代码的唯一标识符，后面可通过这个标识符用`clearTimeout(timeoutId)`取消超时调用
+    + `setInterval()`指定周期执行代码，直至被取消或页面被卸载
+        * 参数同`setTimeout`
+        * `clearInterval(intervalId)`取消周期执行代码
+- 系统对话框
+    + `alert()`
+    + `confirm()`返回值为{OK:True,Cancel:False}
+    + `prompt()`
+        * 第一个参数是显示给用户的文本提示
+        * 第二个参数是文本输入框的默认值
+        * 返回值是{OK：文本输入框的值,Cancel：null}
+    + `window.print()`弹出打印对话框
+    + `window.find()`弹出查找对话框
 
 <a id="location对象"></a>
 ### location对象
