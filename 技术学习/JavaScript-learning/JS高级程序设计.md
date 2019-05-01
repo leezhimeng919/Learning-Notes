@@ -520,6 +520,13 @@
     + 提供了当前窗口中加载文档的有关信息，还提供了一些导航功能
     + 即使window对象的属性也是document对象的属性
         * `window.location == document.location`
+    + `hash`:`#content`
+    + `host`:`www.xx.com:80`
+    + `hostname`:`www.xx.com`
+    + `pathname`:`/demo/`
+    + `port`:`8080`
+    + `protocol`:`http:`
+    + `search`:`?a=1&b=2`
 - 查询字符串参数
     + `location.search`返回从问号到URL末尾的所有内容
     + 想逐个访问每个查询字符串的参数，可自定义函数截取字符串
@@ -535,14 +542,26 @@
 
 <a id="navigator对象"></a>
 ### navigator对象
+- 用来识别客户端浏览器的事实标准，navigator对象的属性通常用于检测显示页面的浏览器类型
 - 检测插件
+    + `navigator.plugins[]`
 - 注册处理程序
 
 <a id="screen对象"></a>
 ### screen对象
+- 用来表明客户端的能力
+    + 浏览器窗口外部的显示器的信息
 
 <a id="history对象"></a>
 ### history对象
+- 保存着用户上网的历史记录,无法得知用户浏览过的URL
+- `history.go()`
+    + 负数表示向后跳转
+    + 正数表示向前跳转
+    + 字符串表示跳转到最近(前后都行)的包含这个字符串的历史记录
+- `history.back()`后退一页
+- `history.forward()`前进一页
+- `hsitory.length`历史记录的数量
 
 <a id="dom"></a>
 ## DOM
