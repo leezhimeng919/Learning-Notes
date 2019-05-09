@@ -3,6 +3,7 @@
 - pil提供了通用的图像处理功能，以及大量有用的基本图像操作
 - pil/pillow
 - Image模块
+    + `from PIL import Image`
     + Image.open('url')
     + im.convert('L')
     + im.size
@@ -15,7 +16,9 @@
 
 ## Matplotlib
 - matplotlib可以绘制出高质量的图标，拥有比pil更强大的绘图更能
+
 - PyLab接口
+    + `from pylab import *`
     + 绘制图像、点、线
         * 约定图像的左上角为坐标原点
         * plot(x,y) 默认蓝色实线
@@ -38,7 +41,35 @@
         * ginput()
 
 ## NumPy
-
+- Python科学计算工具包，其中包含了大量有用的思想如Numpy数组对象和线性代数函数
+- NumPy数组对象用来表示向量、矩阵、图像等
+    + 图像数组表示
+        * `im = array(Image.open(url)`
+            - `im.shape # (800,569,3)` 表示图像数组的大小(行、列、颜色通道)
+                + 灰度图像没有颜色信息
+            - `im.dtype # uint8` 表示数组元素的数据类型,默认是无符号的八位整数
+                + 创建数组时可加入额外参数如`'f'`修改数据类型
+    + 灰度变换
+        * 反相处理
+            - `Image.fromarray()`
+            - `im2 = 255 - im`
+        * 将图像像素值变换到100..200区间
+            - `im3 = (100.0/255) * im + 100`
+        * 对图像像素值求平方后得到的图像(二次函数变换)
+            - `im4 = 255.0 * (im/255.0)**2`
+    + 图像缩放
+        * `NumPy.demo3.imresize`
+    + 直方图均衡化
+        * 将一幅图像的灰度直方图扁平，使变换后的图像中每个灰度值的分布概率都相同(灰度值归一化)
+        * 变换函数是图像中像素值的累积分布函数cdf
+        * `NumPy.demo3.histeq`
+    + 图像平均
+        * 图像平均操作时减少图像噪声的一种简单方式，通常用于艺术特效
+        * `NumPy.demo4.computer_average`
+    + 图像的主成分分析(PCA principle component analysis)
+        * PCA是一个非常有用降维技巧，可以再使用尽可能少维数的前提下，尽量多的保持训练数据的信息
+        * 通常使用奇异值分解(SVD Singular Value Decomposition)方法来计算主成分，但当矩阵的维数很大时，SVD计算非常慢，此时使用PCA
+    + pickle模块
 
 ## SciPy
 # 局部图像描述子
