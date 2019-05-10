@@ -10,6 +10,7 @@ imshow(im)
 
 x = ginput(3)
 
-print x
+print (x)
+
 show()
 
