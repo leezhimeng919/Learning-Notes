@@ -7,27 +7,17 @@
 <body>
   <script>
   	
-function SuperType() {
-	this.property = true;
+function obj(obj) {
+	with (obj){
+		b = 2
+	}
+}
+var obj1 = {
+	a:1
 }
 
-SuperType.prototype.getSuperValue = function() {
-	return this.property;
-};
-
-function SubType() {
-	this.subproperty = false;
-}
-
-SubType.prototype = new SuperType();
-
-SubType.prototype.getSubValue = function() {
-	return this.subproperty;
-};
-
-var instantce = new SubType();
-
-console.log(instantce.getSuperValue());
+obj(obj1)
+console.log(b)
 
   </script>
 </body>
