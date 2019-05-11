@@ -88,7 +88,7 @@
 
 ### 块作用域
 - with
-- trycatch
+- try/catch
 - let
 - const
 
