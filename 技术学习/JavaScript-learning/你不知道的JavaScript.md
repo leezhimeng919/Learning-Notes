@@ -89,6 +89,7 @@
 ### 块作用域
 - with
 - try/catch
+    + catch语句
 - let
 - const
 
