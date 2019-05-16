@@ -1,2 +1,2 @@
-import cherrypy, os, urllib, pickle
-import imagesearch
+# import cherrypy, os, urllib, pickle
+import sqlite3
