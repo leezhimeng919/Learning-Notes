@@ -161,7 +161,7 @@ def useMatch():
 		im1f, im2f = sys.argv[1], sys.argv[2]
 	else:
 		im1f = 'imageT/ex1.jpg'
-		im2f = 'imageT/ex2.jpg'
+		im2f = 'imageT/test2.jpg'
 	im1 = array(Image.open(im1f))
 	im2 = array(Image.open(im2f))
 	 
