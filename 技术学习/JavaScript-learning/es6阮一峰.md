@@ -1,4 +1,13 @@
+<!-- MarkdownTOC -->
 
+- [let和const命令](#let和const命令)
+- [变量的解构赋值](#变量的解构赋值)
+- [函数的拓展](#函数的拓展)
+- [Promise对象](#promise对象)
+
+<!-- /MarkdownTOC -->
+
+<a id="let和const命令"></a>
 ### let和const命令
 - let命令
 	+ let命令只在所在的代码块内有效
@@ -65,6 +74,7 @@
 		* 函数里面的this，如果函数不是作为兑现改的方式运行，而是单纯作为函数运行，this会指向顶层对象。
 	+ TO CONTINUE...
 		
+<a id="变量的解构赋值"></a>
 ### 变量的解构赋值
 - 数组的解构赋值
 	+ 基本用法
@@ -181,6 +191,7 @@
 		* const { SourceMapConsumer, SourceNode } = require("source-map")
 
 
+<a id="函数的拓展"></a>
 ### 函数的拓展
 - 函数参数的默认值
 	+ ES6之前，不能直接为函数的参数指定默认值，只能采用变通的方法
@@ -204,6 +215,7 @@
 - 尾调用优化
 - 函数参数的尾逗号
 
+<a id="promise对象"></a>
 ### Promise对象
 - Promise是异步编程的一种解决方法，ES6将其写进语言标准，原生提供了Promise对象
 - 两个特点
