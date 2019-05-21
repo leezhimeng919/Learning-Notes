@@ -44,6 +44,10 @@
         - [对象的内容](#对象的内容)
         - [遍历](#遍历)
     - [混合对象“类”](#混合对象“类”)
+        - [类理论](#类理论)
+        - [类的机制](#类的机制)
+        - [类的继承](#类的继承)
+        - [混入](#混入)
     - [原型](#原型)
     - [行为委托](#行为委托)
     - [ES6中的class](#es6中的class)
@@ -606,18 +610,108 @@ function bind(fn,obj){
         * 冻结拥有最高级别的不变性
     + 上述所有方法创建的都是浅不变性，即只会影响目标对象和其直接属性，若目标对象引用其他对象，其他对象的内部不受影响，仍然可变。若需要深不变性，遍历引用的所有的对象并调用相应方法即可。很少需要深不变性
 - `[[Get]]`
-    + 
+    + 对象的属性访问实际上是实现了[[Get]]操作
+    + 如果当前对象和原型链都没有找到相同名称的属性，会返回undefined
 - `[[Put]]`
+    + 设置属性或创建属性
 - Getter和Setter
+    + 都是隐藏函数，分别在获取属性值时和设置属性值时调用
+    + 当同时给属性定义getter和setter时，此属性会被定义为访问描述符，它们的value和writable特性会被忽略
+    + 两种方法配置
+        * 对象字面量中`get a(){}`
+        * Object.defineProperty(obj,prop,{get:f,set:f})
+```
+var obj = {
+    get a(){
+        return 1
+    }
+}
+
+Object.defineProperty(obj,'b',{
+    get:function(){
+        return 2
+    }
+    })
+```
+
 - 存在性
+    + `prop in obj`检查属性是否在对象及其原型链中
+        * `in`检查属性名是否存在而不是值，不能用来检查值在不在数组中
+    + `obj.hasOwnProperty(prop)`检查属性是否在对象中
+    + `Object.prototype.hasOwnProperty.call(obj,prop)`判断存在性的强硬方法
+    + 可枚举
+        * 可以出现在对象属性的遍历中`enumerable:true`
+        * `for in`最好只应用在对象上
+        * `obj.propertyIsEnumberable(prop)`检查给定的属性名是否直接存在于对象中并满足enumerable:true
+        * `Object.keys(obj)`返回一个数组，包含所有可枚举属性
+        * `Object.getOwnPropertyNames(obj)`返回一个数组，包含所有属性
 
 <a id="遍历"></a>
 ### 遍历
+- 遍历属性
+    + 遍历对象
+        * `for in`
+    + 遍历数组
+        * `for`遍历数组下标指向值
+        * ES5数组的辅助迭代器 `forEach` `every` `some`
+            - forEach忽略回调函数的返回值
+            - every一直运行到回调函数返回值为false
+            - some一直运行到回调函数返回值为true
+            - every和some类似于for循环中的break
+- 直接遍历值
+    + ES6 `for of`
+        * 被访问对象请求一个迭代器对象，通过调用迭代器对象的next方法遍历所有返回值
+        * 数组有内置的@@iterator，对象需要定义迭代器
+        * @@iterator本身不是一个迭代器对象，而是一个返回迭代器对象的函数，使用时需要函数执行`myArr[Symbol.iterator]()`
+        * `next()`返回形式`{value:.., done:..}`done表示遍历是否结束
+        * 每次调用迭代器对象的next()内部指针都会向前移动并返回对象属性列表的下一个值
+    + 使用
+```
+for(var i of array){
+    console.log(i)
+}
+//array[0]
+//array[1]
+...
+//使用Symbol.iterator获取对象的@@iterator内部属性
+var it = array[Symbol.iterator]();
+it.next()//{value:array[0],done:false}
+...
+it.next()//{done:true}
+```
 
 <a id="混合对象“类”"></a>
 ## 混合对象“类”
+<a id="类理论"></a>
+### 类理论
+- 类的设计模式
+    + 类是一种设计模式，不是必须的编程基础
+- JavaScript中的类
+    + JavaScript中没有类，提供了一些近似类的语法
+<a id="类的机制"></a>
+
+<a id="类的机制"></a>
+### 类的机制
+- 建造
+    + 类和实例的关系
+- 构造函数
+    + 构造类实例的一个特殊类方法
+
+<a id="类的继承"></a>
+### 类的继承
+- 多态
+    + 虚拟多态，相对多态
+- 多重继承
+
+<a id="混入"></a>
+### 混入
+- 显式混入
+- 隐式混入
+
 <a id="原型"></a>
 ## 原型
+
+
 <a id="行为委托"></a>
 ## 行为委托
 <a id="es6中的class"></a>
@@ -658,6 +752,7 @@ function bind(fn,obj){
 # 起步上路
 <a id="深入编程"></a>
 ## 深入编程
+
 <a id="深入javascript"></a>
 ## 深入JavaScript
 <a id="es6及更新版本"></a>
