@@ -46,7 +46,9 @@ class Vocabulary(object):
             to create a histogram of words. """
         
         # histogram of image words 
+
         imhist = zeros((self.nbr_words))
+        print vq(descriptors,self.voc)
         words,distance = vq(descriptors,self.voc)
         for w in words:
             imhist[w] += 1

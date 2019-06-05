@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from numpy import *
 import pickle
 import sqlite3
@@ -9,7 +11,7 @@ class Indexer(object):
         """ Initialize with the name of the database 
             and a vocabulary object. """
             
-        self.con = sqlite.connect(db)
+        self.con = sqlite3.connect(db)
         self.voc = voc
     
     def __del__(self):
@@ -46,7 +48,7 @@ class Indexer(object):
         
         # get the imid
         imid = self.get_id(imname)
-        
+        print self.voc
         # get the words
         imwords = self.voc.project(descr)
         nbr_words = imwords.shape[0]
@@ -78,7 +80,7 @@ class Searcher(object):
     
     def __init__(self,db,voc):
         """ Initialize with the name of the database. """
-        self.con = sqlite.connect(db)
+        self.con = sqlite3.connect(db)
         self.voc = voc
     
     def __del__(self):
