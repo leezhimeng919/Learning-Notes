@@ -1,6 +1,36 @@
-#HTML介绍
+<!-- MarkdownTOC -->
 
-## html
+- [HTML介绍](#html介绍)
+    - [html概述](#html概述)
+    - [head](#head)
+    - [文本](#文本)
+    - [链接](#链接)
+    - [高级文本](#高级文本)
+    - [文档与网站架构](#文档与网站架构)
+- [多媒体与嵌入](#多媒体与嵌入)
+    - [HTML中的图片](#html中的图片)
+    - [视频和音频内容](#视频和音频内容)
+    - [嵌入技术](#嵌入技术)
+    - [向量\(矢量\)图](#向量矢量图)
+    - [自适应图片](#自适应图片)
+- [HTML表格](#html表格)
+    - [表格基础](#表格基础)
+    - [表格进阶](#表格进阶)
+- [HTML表单](#html表单)
+    - [表单基础](#表单基础)
+    - [构建表单](#构建表单)
+    - [原生表单挂件](#原生表单挂件)
+    - [发送表单数据](#发送表单数据)
+    - [表单校验](#表单校验)
+
+<!-- /MarkdownTOC -->
+
+
+<a id="html介绍"></a>
+# HTML介绍
+
+<a id="html概述"></a>
+## html概述
 - 元素：开始标记，加结束标记，加内容，等于元素
     + 嵌套元素：<p>My cat is <strong>very</strong> grumpy.</p>
     + 块级元素和内联元素
@@ -30,7 +60,8 @@
 - 注释
     + <!-- -->
 
-##head
+<a id="head"></a>
+## head
 - head里的内容，是不会再页面中显示出来的
 - <title></title>
 - 元数据：<meta>元素，描述数据的数据
@@ -40,9 +71,12 @@
 - 为站点增加自定义图标
     + <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 - css和JavaScript
+    + <link rel="stylesheet" type="text/css" href="">
+    + <style src=""></style>
 - 为文档设定主语言
     + <html lang="en-US"></html>
 
+<a id="文本"></a>
 ##文本
 - 基础：标题和段落
     + 结构层次
@@ -60,6 +94,7 @@
     + <i></i>
     + <u></u>
 
+<a id="链接"></a>
 ##链接
 - 链接的解析
     + title属性：链接悬停显示
@@ -83,6 +118,7 @@
 - 电子邮件链接
     + mailto:link
 
+<a id="高级文本"></a>
 ##高级文本
 - 描述列表
     + dl:description list
@@ -113,7 +149,8 @@
 - 标记时间和日期
     + <time></time>
 
-##文档与网站架构
+<a id="文档与网站架构"></a>
+## 文档与网站架构
 - 文档的基本组成区段section
     + 标题栏
     + 导航栏
@@ -139,8 +176,10 @@
         * <br>换行
         * <hr>水平分割线
 
-#多媒体与嵌入
+<a id="多媒体与嵌入"></a>
+# 多媒体与嵌入
 
+<a id="html中的图片"></a>
 ##HTML中的图片
 - <img src="images/描述性的名字.jpg" alt="">
 - 警告：大多数图片是有版权的。不要在你的网页上使用一张图片，除非：
@@ -160,6 +199,7 @@
     + 优点：可以更好的控制图片和设置图片的位置
     + 劣势：纯粹为了装饰，没有语义上的意义，不能被屏幕阅读器识别
 
+<a id="视频和音频内容"></a>
 ##视频和音频内容
 - Flash和Silverlight
 - JavaScript的api
@@ -205,6 +245,7 @@
                 + 《重学前端》33.HTML替换型元素：为什么link一个CSS要用href，而引入js要用src呢
             - 使用srclang告诉浏览器用什么语言编写subtitles
 
+<a id="嵌入技术"></a>
 ##嵌入技术
 - <iframe src="" width="" height=""  frameborder="1" allowfullscreen sandbox>备选内容</iframe>
     + allowfullscreen：全屏模式
@@ -224,6 +265,7 @@
     + embed和object元素用来嵌入多种类型的外部内容的通用嵌入工具，包括插件技术
     + 不推荐
 
+<a id="向量矢量图"></a>
 ##向量(矢量)图
 - 位图bitmap(光栅图raster images、点阵图、像素图)：使用像素网格来定义
     + 一个位图文件精确包含了每个像素的位置和它的色彩信息
@@ -262,6 +304,7 @@
         * 缺点：iframe回退机制，如果浏览器不支持iframe，则会显示回退
         * 除非SVG和你当前网页具有相同的origin，否则不能用JavaScript操纵SVG
 
+<a id="自适应图片"></a>
 ##自适应图片
 - 为什么要自适应
     + 艺术方向问题
@@ -307,8 +350,10 @@
         * type声明文件类型MIME
             - MIME类型：type/subtype
 
+<a id="html表格"></a>
 #HTML表格
 
+<a id="表格基础"></a>
 ##表格基础
 - 不使用HTML表格的几个原因
     + 屏幕阅读器不好阅读
@@ -327,6 +372,7 @@
         <col style="" span="">
     </colgroup>
 
+<a id="表格进阶"></a>
 ##表格进阶
 - <caption>为表格增加标题</caption>
     + 曾经summary属性用来为表格提供描述，后被H5规范移除
@@ -342,8 +388,10 @@
         * <th id=""></th>
         * <td headers="需要包含th的id">多个th元素用空格隔开</td>
 
+<a id="html表单"></a>
 #HTML表单
 
+<a id="表单基础"></a>
 ##表单基础
 - 表单越大，失去用户的风险就越大。保持简单，只要求必要的数据
 - form in HTML
@@ -369,6 +417,7 @@
     + <form action="/my-handling-form-page" method="post"></form>
     + name属性。为数据命名，收集特定的数据块。
 
+<a id="构建表单"></a>
 ##构建表单
 - 注意：禁止嵌套表单
     + <form>外部的小部件没有特殊效果，需要JavaScript定制他们的行为
@@ -386,6 +435,7 @@
 - 用于表单的通用HTML结构
     + [payment-form.html](/payment-form.html)
 
+<a id="原生表单挂件"></a>
 ##原生表单挂件
 - 通用属性
     + autofocus，默认值false，使部件成为焦点。有唯一性
@@ -524,6 +574,7 @@
                 + meter不支持平稳退化
                 + IE不支持
     
+<a id="发送表单数据"></a>
 ##发送表单数据
 - 数据去哪了？
     + 客户端/服务器体系架构
@@ -578,6 +629,7 @@
         * 限制输入的数据量，只允许有必要的数据
         * 沙盒上传文件，将文件存储在不同的服务器上，只允许通过不同的子域访问文件，或者通过完全不同的域名访问文件
 
+<a id="表单校验"></a>
 ##表单校验
 
 
