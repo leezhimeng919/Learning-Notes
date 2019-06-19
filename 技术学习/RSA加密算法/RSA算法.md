@@ -1,3 +1,13 @@
+<!-- MarkdownTOC -->
+
+- [RSA加密](#rsa加密)
+- [AES加密](#aes加密)
+- [APP接口设计\(加密/签名/TOKEN认证/接口版本\)](#app接口设计加密签名token认证接口版本)
+- [参考文献](#参考文献)
+
+<!-- /MarkdownTOC -->
+
+<a id="rsa加密"></a>
 # RSA加密
 -  加密历史
     + 对称加密算法
@@ -62,12 +72,14 @@
             - 长信息分割若干短信息，每段分别加密
             - 使用对称性加密算法(如DES,data encryption standard|AED,advanced encryption standard)加密传输的报文，再用RSA公钥将DES密钥加密
         
+<a id="aes加密"></a>
 # AES加密
 - 加密
     + base64_encode(mcrypt_encrypt($cipher, $key,$data, $mode,$iv));
 - 解密
     + mcrypt_decrypt($cipher, $key, base64_decode($data), $mode, $iv);
 
+<a id="app接口设计加密签名token认证接口版本"></a>
 # APP接口设计(加密/签名/TOKEN认证/接口版本)
 + 接口安全问题：
     * 请求来源是否合法
@@ -98,4 +110,9 @@
     * 若当前请求需要验证用户是否登录, 则 用户登录凭证(decryptValue[TOKEN]) 不能为空, 并查询数据库, 判断 TOKEN 是否过期
     * 获取 请求数据(requestData), 使用 接口密钥(secretKey) 对请求数据验签
     * 返回数据时, 转为JSON格式后, 使用 解密后的AES密钥(decryptKey) 进行加密, 然后返回给客户端
+
+
+<a id="参考文献"></a>
+# 参考文献
+[阮一峰-RSA算法原理](http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html)
 

@@ -143,8 +143,47 @@
         * `>`和`+`和`~`被称为组合子。目前由于页面渲染性能的原因，只能向后选择同辈
     + 通用选择符
         * `*`
+        ```
+        * {
+            padding: 0;
+            margin: 0;
+        }//删除所有元素默认的内外边距，由于会带来很多意想不到的后果，被摒弃
+        //替代方案
+        1.reset.css
+            比较暴力，为了应对不同浏览器对元素默认样式的差异造成的差异
+            源码和上述类似
+        2.normalize.css 推荐
+            bootstrap用的就是这个css重置样式库；保存有用的默认值
+            设计思路：确保所有元素样式跨浏览器的一致性
+        ```
+        * 可以与组合子结合使用，选择某个特定的嵌套层次
     + 属性选择符
+        * 数据属性data-*提供了一种在HTML属性中存储自定义数据的方法
+        ```
+         <li data-quantity="1kg" data-vegetable>Tomatoes</li>
+         data-vegetable就是自定义属性，语义化
+         命名符合xml标准，不能用大写，不用以xml开头，一般是小写字母
+        ```
+        * 存在和值属性选择器
+            - a[attr]  a元素具有attr属性
+            - a[attr="val"]  a元素具有attr属性且属性值刚好只为val
+            - a[attr~="val"]  a元素具有attr属性且属性值包含val，空格隔开的属性值val
+        * 子字符串属性选择器(伪正则选择器)
+            - a[attr|="val"]  a元素具有attr属性且属性值以val或val-开头
+            - a[attr^="val"]  a元素具有attr属性且属性值以val开头
+            - a[attr$="val"]  a元素具有attr属性且属性值以val结尾
+            - a[attr*="val"]  a元素具有attr属性且属性值含有子字符串val
     + 伪元素
+        * what：一些特殊的css选择符
+        * why：当想选择某元素之外的特定位置时，使用伪元素
+            - 不想为了文本添加样式而额外的添加元素时，可以使用伪元素
+        * 伪元素有哪些
+            - ::after
+            - ::before
+            - ::first-letter
+            - ::first-line
+            - ::selection
+            - ::backdrop
     + 伪类
     + 结构化伪类
     + 表单伪类
