@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>css0</title>
+        <style>
+            .media-block {
+                background-color:gray;
+                border: solid 1px black;
+
+            }
+
+            .media-fig {
+                float: left;
+                width: 30%;
+            }
+
+            .media-body {
+                float: right;
+                width: 65%
+            }
+            .media-block,.media-body{
+                overflow: auto;
+            }
+            /* .clear {
+                clear: both;
+            }
+            .media-block::after{
+                content:'';
+                display: block;
+                clear: both;
+            } */
+
+        </style>
+    </head>
+    <body>
+         <div class="media-block">
+             <img src="./holdon.jpg" alt="holdon" class="media-fig">
+             <div class="media-body">
+                 <h3>title of this</h3>
+                 <p>brief description of this</p>
+             </div>
+            <!-- <div class="clear"></div> -->
+         </div>
+    </body>
+</html>
