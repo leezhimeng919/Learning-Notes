@@ -11,8 +11,8 @@
   - [执行环境及作用域](#%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F)
   - [垃圾收集](#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86)
 - [引用类型](#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)
-  - [Object类型](#object%E7%B1%BB%E5%9E%8B)
-  - [Array类型](#array%E7%B1%BB%E5%9E%8B)
+  - [Object类型](#Object%E7%B1%BB%E5%9E%8B)
+  - [Array类型](#Array%E7%B1%BB%E5%9E%8B)
 - [面向对象的程序设计](#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
   - [理解对象](#%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1)
   - [创建对象](#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1)
@@ -22,27 +22,36 @@
   - [闭包](#%E9%97%AD%E5%8C%85)
   - [模仿块级作用域](#%E6%A8%A1%E4%BB%BF%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F)
   - [私有变量](#%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F)
-- [BOM](#bom)
-  - [Window对象](#window%E5%AF%B9%E8%B1%A1)
+- [BOM](#BOM)
+  - [Window对象](#Window%E5%AF%B9%E8%B1%A1)
   - [location对象](#location%E5%AF%B9%E8%B1%A1)
   - [navigator对象](#navigator%E5%AF%B9%E8%B1%A1)
   - [screen对象](#screen%E5%AF%B9%E8%B1%A1)
   - [history对象](#history%E5%AF%B9%E8%B1%A1)
-- [DOM](#dom)
+- [DOM](#DOM)
   - [节点层次](#%E8%8A%82%E7%82%B9%E5%B1%82%E6%AC%A1)
-  - [DOM操作技术](#dom%E6%93%8D%E4%BD%9C%E6%8A%80%E6%9C%AF)
-  - [DOM拓展](#dom%E6%8B%93%E5%B1%95)
-- [Json](#json)
+  - [DOM操作技术](#DOM%E6%93%8D%E4%BD%9C%E6%8A%80%E6%9C%AF)
+- [DOM拓展](#DOM%E6%8B%93%E5%B1%95)
+  - [选择符API](#%E9%80%89%E6%8B%A9%E7%AC%A6API)
+  - [元素遍历](#%E5%85%83%E7%B4%A0%E9%81%8D%E5%8E%86)
+  - [HTML5](#HTML5)
+  - [专有扩展](#%E4%B8%93%E6%9C%89%E6%89%A9%E5%B1%95)
+- [DOM2和DOM3](#DOM2%E5%92%8CDOM3)
+  - [DOM变化](#DOM%E5%8F%98%E5%8C%96)
+  - [样式](#%E6%A0%B7%E5%BC%8F)
+  - [遍历](#%E9%81%8D%E5%8E%86)
+  - [范围](#%E8%8C%83%E5%9B%B4)
+- [Json](#Json)
   - [语法](#%E8%AF%AD%E6%B3%95-1)
     - [简单值](#%E7%AE%80%E5%8D%95%E5%80%BC)
     - [对象](#%E5%AF%B9%E8%B1%A1)
     - [数组](#%E6%95%B0%E7%BB%84)
   - [解析与序列化](#%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96)
-    - [JSON对象](#json%E5%AF%B9%E8%B1%A1)
+    - [JSON对象](#JSON%E5%AF%B9%E8%B1%A1)
     - [序列化选项](#%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%89%E9%A1%B9)
-- [Ajax与Comet](#ajax%E4%B8%8Ecomet)
-  - [XMLHttpRequest对象](#xmlhttprequest%E5%AF%B9%E8%B1%A1)
-    - [XHR的用法](#xhr%E7%9A%84%E7%94%A8%E6%B3%95)
+- [Ajax与Comet](#Ajax%E4%B8%8EComet)
+  - [XMLHttpRequest对象](#XMLHttpRequest%E5%AF%B9%E8%B1%A1)
+    - [XHR的用法](#XHR%E7%9A%84%E7%94%A8%E6%B3%95)
 
 
 
@@ -669,7 +678,17 @@
 - 使用NodeList
 
 <a id="dom拓展"></a>
-### DOM拓展
+## DOM拓展
+### 选择符API
+### 元素遍历
+### HTML5
+### 专有扩展
+## DOM2和DOM3
+### DOM变化
+### 样式
+### 遍历
+### 范围
+
 
 <a id="json"></a>
 ## Json
