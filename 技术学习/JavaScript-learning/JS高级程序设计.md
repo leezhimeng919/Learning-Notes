@@ -1,4 +1,13 @@
-- [基础概念](#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5)
+- [1.JavaScript简介](#1JavaScript%E7%AE%80%E4%BB%8B)
+  - [JavaScript简史](#JavaScript%E7%AE%80%E5%8F%B2)
+  - [JavaScript实现](#JavaScript%E5%AE%9E%E7%8E%B0)
+  - [JavaScript版本](#JavaScript%E7%89%88%E6%9C%AC)
+- [2.在HTML中使用JavaScript](#2%E5%9C%A8HTML%E4%B8%AD%E4%BD%BF%E7%94%A8JavaScript)
+  - [script元素](#script%E5%85%83%E7%B4%A0)
+  - [嵌入代码与外部文件](#%E5%B5%8C%E5%85%A5%E4%BB%A3%E7%A0%81%E4%B8%8E%E5%A4%96%E9%83%A8%E6%96%87%E4%BB%B6)
+  - [文档模式](#%E6%96%87%E6%A1%A3%E6%A8%A1%E5%BC%8F)
+  - [noscript元素](#noscript%E5%85%83%E7%B4%A0)
+- [3.基础概念](#3%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5)
   - [语法](#%E8%AF%AD%E6%B3%95)
   - [关键字和保留字](#%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E4%BF%9D%E7%95%99%E5%AD%97)
   - [变量](#%E5%8F%98%E9%87%8F)
@@ -6,42 +15,58 @@
   - [操作符](#%E6%93%8D%E4%BD%9C%E7%AC%A6)
   - [语句](#%E8%AF%AD%E5%8F%A5)
   - [函数](#%E5%87%BD%E6%95%B0)
-- [变量、作用域和内存问题](#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98)
+- [4.变量、作用域和内存问题](#4%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98)
   - [基本类型和引用类型的值](#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC)
   - [执行环境及作用域](#%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F)
   - [垃圾收集](#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86)
-- [引用类型](#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)
+- [5.引用类型](#5%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)
   - [Object类型](#Object%E7%B1%BB%E5%9E%8B)
   - [Array类型](#Array%E7%B1%BB%E5%9E%8B)
-- [面向对象的程序设计](#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
+  - [Date类型](#Date%E7%B1%BB%E5%9E%8B)
+  - [RegExp类型](#RegExp%E7%B1%BB%E5%9E%8B)
+  - [Function类型](#Function%E7%B1%BB%E5%9E%8B)
+  - [基本包装类型](#%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B)
+  - [单体内置对象](#%E5%8D%95%E4%BD%93%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1)
+- [6.面向对象的程序设计](#6%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
   - [理解对象](#%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1)
   - [创建对象](#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1)
   - [继承](#%E7%BB%A7%E6%89%BF)
-- [函数表达式](#%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F)
+- [7.函数表达式](#7%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F)
   - [递归](#%E9%80%92%E5%BD%92)
   - [闭包](#%E9%97%AD%E5%8C%85)
   - [模仿块级作用域](#%E6%A8%A1%E4%BB%BF%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F)
   - [私有变量](#%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F)
-- [BOM](#BOM)
+- [8.BOM](#8BOM)
   - [Window对象](#Window%E5%AF%B9%E8%B1%A1)
   - [location对象](#location%E5%AF%B9%E8%B1%A1)
   - [navigator对象](#navigator%E5%AF%B9%E8%B1%A1)
   - [screen对象](#screen%E5%AF%B9%E8%B1%A1)
   - [history对象](#history%E5%AF%B9%E8%B1%A1)
-- [DOM](#DOM)
+- [9.客户端检测(检测是啥浏览器)](#9%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B%E6%A3%80%E6%B5%8B%E6%98%AF%E5%95%A5%E6%B5%8F%E8%A7%88%E5%99%A8)
+  - [能力监测](#%E8%83%BD%E5%8A%9B%E7%9B%91%E6%B5%8B)
+  - [怪癖检测](#%E6%80%AA%E7%99%96%E6%A3%80%E6%B5%8B)
+  - [用户代理检测](#%E7%94%A8%E6%88%B7%E4%BB%A3%E7%90%86%E6%A3%80%E6%B5%8B)
+- [10.DOM](#10DOM)
   - [节点层次](#%E8%8A%82%E7%82%B9%E5%B1%82%E6%AC%A1)
   - [DOM操作技术](#DOM%E6%93%8D%E4%BD%9C%E6%8A%80%E6%9C%AF)
-- [DOM拓展](#DOM%E6%8B%93%E5%B1%95)
+- [11.DOM拓展](#11DOM%E6%8B%93%E5%B1%95)
   - [选择符API](#%E9%80%89%E6%8B%A9%E7%AC%A6API)
   - [元素遍历](#%E5%85%83%E7%B4%A0%E9%81%8D%E5%8E%86)
   - [HTML5](#HTML5)
   - [专有扩展](#%E4%B8%93%E6%9C%89%E6%89%A9%E5%B1%95)
-- [DOM2和DOM3](#DOM2%E5%92%8CDOM3)
+- [12.DOM2和DOM3](#12DOM2%E5%92%8CDOM3)
   - [DOM变化](#DOM%E5%8F%98%E5%8C%96)
   - [样式](#%E6%A0%B7%E5%BC%8F)
   - [遍历](#%E9%81%8D%E5%8E%86)
   - [范围](#%E8%8C%83%E5%9B%B4)
-- [Json](#Json)
+- [13.事件](#13%E4%BA%8B%E4%BB%B6)
+  - [事件流](#%E4%BA%8B%E4%BB%B6%E6%B5%81)
+  - [事件处理程序](#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F)
+  - [事件对象](#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1)
+  - [事件类型](#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B)
+  - [内存和性能](#%E5%86%85%E5%AD%98%E5%92%8C%E6%80%A7%E8%83%BD)
+  - [模拟事件](#%E6%A8%A1%E6%8B%9F%E4%BA%8B%E4%BB%B6)
+- [20.Json](#20Json)
   - [语法](#%E8%AF%AD%E6%B3%95-1)
     - [简单值](#%E7%AE%80%E5%8D%95%E5%80%BC)
     - [对象](#%E5%AF%B9%E8%B1%A1)
@@ -49,30 +74,77 @@
   - [解析与序列化](#%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96)
     - [JSON对象](#JSON%E5%AF%B9%E8%B1%A1)
     - [序列化选项](#%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%89%E9%A1%B9)
-- [Ajax与Comet](#Ajax%E4%B8%8EComet)
+- [21.Ajax与Comet](#21Ajax%E4%B8%8EComet)
   - [XMLHttpRequest对象](#XMLHttpRequest%E5%AF%B9%E8%B1%A1)
-    - [XHR的用法](#XHR%E7%9A%84%E7%94%A8%E6%B3%95)
+  - [XMLHttpRequest 2级](#XMLHttpRequest-2%E7%BA%A7)
+  - [进度事件](#%E8%BF%9B%E5%BA%A6%E4%BA%8B%E4%BB%B6)
+  - [跨域资源共享](#%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB)
+  - [其他跨域技术](#%E5%85%B6%E4%BB%96%E8%B7%A8%E5%9F%9F%E6%8A%80%E6%9C%AF)
+  - [安全](#%E5%AE%89%E5%85%A8)
+- [22.高级技巧](#22%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7)
+  - [高级函数](#%E9%AB%98%E7%BA%A7%E5%87%BD%E6%95%B0)
+  - [防篡改对象](#%E9%98%B2%E7%AF%A1%E6%94%B9%E5%AF%B9%E8%B1%A1)
+  - [高级定时器](#%E9%AB%98%E7%BA%A7%E5%AE%9A%E6%97%B6%E5%99%A8)
+  - [自定义事件](#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6)
+  - [拖放](#%E6%8B%96%E6%94%BE)
+- [23.离线应用与客户端存储](#23%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AD%98%E5%82%A8)
+  - [离线监测](#%E7%A6%BB%E7%BA%BF%E7%9B%91%E6%B5%8B)
+  - [应用缓存](#%E5%BA%94%E7%94%A8%E7%BC%93%E5%AD%98)
+  - [数据存储](#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8)
+- [24.最佳实践](#24%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+  - [可维护性](#%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7)
+  - [性能](#%E6%80%A7%E8%83%BD)
+  - [部署](#%E9%83%A8%E7%BD%B2)
 
+## 1.JavaScript简介
+### JavaScript简史
+### JavaScript实现
+- ES
+- DOM
+- BOM
+### JavaScript版本
 
+## 2.在HTML中使用JavaScript
+### script元素
+- 标签的位置
+- 延迟脚本
+- 异步脚本
+- 在XHTML中的用法
+- 不推荐使用的语法
+### 嵌入代码与外部文件
+### 文档模式
+### noscript元素
 
-## 基础概念
+## 3.基础概念
 ### 语法
+- 区分大小写
+- 标识符
+- 注释
+- 严格模式
+- 语句
 ### 关键字和保留字
 ### 变量
 ### 数据类型
+- typeof操作符
+- undefined
+- null
+- boolean
+- number
+- string
+- object
 ### 操作符
 >主要分四大类：算数运算符、位运算符、关系操作符、相等操作符
 <br>ES中的操作符不同之处在于能够适用于多种类型的值，在应用对象时，会调用对象的valueOf或toString
 
 - 一元操作符：只能操作一个值的操作符
   - 递增和递减操作符
-    - 
+    - `a++\++a`
+    - `a--\--a`
   - 一元加和一元减操作符
     - `+num`
     - `-num`
 - 位操作符
   - 按位非(NOT) `~`
-    - 
   - 按位与(AND) `&`
   - 按位或(OR) `|`
   - 按位异或(XOR) `^`
@@ -88,34 +160,40 @@
   - 除法 `/`
   - 求模 `%`
 - 加性操作符
-  - 加法
-  - 减法
+  - 加法 `+`
+  - 减法 `-`
 - 关系操作符
-  - 小于
-  - 大于
-  - 小于等于
-  - 大于等于
+  - 小于 `<`
+  - 大于 `>`
+  - 小于等于 `<=`
+  - 大于等于 `>=`
 - 相等操作符
-  - 相等
-  - 不相等
-  - 全等
-  - 不全等
+  - 相等 `==`
+  - 不相等 `!=`
+  - 全等 `===`
+  - 不全等 `!==`
 - 条件操作符
-  - 问号
+  - 问号 `a?b:c`
 - 赋值操作符
-  - 等号
+  - 等号 `=`
 - 逗号操作符
-  - 用于赋值
-  - 用于声明
+  - 用于赋值 `var a = (5, 1, 4)`，用于赋值时，逗号操作符会返回表达式中的最后一项
+  - 用于声明 `var a = 1, b = 2`
 ### 语句
+- if语句
+- do-while语句
+- while语句
+- for语句
+- for-in语句
+- label语句
+- break和continue语句
+- with语句
+- switch语句
 ### 函数
+- 理解函数
+- 没有重载
 
-<a id="变量、作用域和内存问题"></a>
-
-## 变量、作用域和内存问题
-
-<a id="基本类型和引用类型的值"></a>
-
+## 4.变量、作用域和内存问题
 ### 基本类型和引用类型的值
 
 - 变量的访问
@@ -134,7 +212,6 @@
     + `typeof`方便检测基本类型
     + `instanceof`方便检测引用类型
 
-<a id="执行环境及作用域"></a>
 
 ### 执行环境及作用域
 - 产生：当某个函数被调用时，会创建一个执行环境及相应的作用域链，然后用arguments和其他命名参数的值来初始化活动对象
@@ -156,29 +233,29 @@
 - 没有块级作用域
     + es6补充let、const关键字
 
-<a id="垃圾收集"></a>
 
 ### 垃圾收集
-- 标记清楚
+- 标记清除
 - 引用计数
 - 性能问题
 - 管理内存
 
 
-## 引用类型
+## 5.引用类型
 - 引用类型是一种数据结构，用于将数据和功能组织到一起。比如Array.push()，Array是数组，push是为数组增加元素的功能。
 - 引用类型也是一种对象定义，描述一类对象所具有的的属性和方法
 - 引用类型和类不是相同的概念，对象是引用类型的实例
 
 ### Object类型
 
-
 ### Array类型
+### Date类型
+### RegExp类型
+### Function类型
+### 基本包装类型
+### 单体内置对象
 
-<a id="面向对象的程序设计"></a>
-
-## 面向对象的程序设计
-<a id="理解对象"></a>
+## 6.面向对象的程序设计
 
 ### 理解对象
 - 属性类型：为了实现JavaScript引擎，在JavaScript中不能直接访问它们
@@ -205,7 +282,6 @@
     + 接收两个参数：属性所在对象、要读取其描述符的属性名
     + 返回值是一个对象，对象的属性视数据属性和访问器属性而不同
 
-<a id="创建对象"></a>
 
 ### 创建对象
 - 工厂模式
@@ -239,27 +315,27 @@
         * `实例.__proto__`:当调用构造函数创建一个实例后，这个实例中会包含一个指向构造函数原型对象的指针`[[prototype]]`，在浏览器上是的体现是每个实例对象上有一个 `__proto__`属性
         * 总结：实例的属性中会有`__proto__`属性指向原型对象，构造函数中会有`prototype`属性指向原型对象，原型对象中会有`constructor`属性指向构造函数
         * `isPrototypeOf()`
-            - Person.prototype.isPrototypeOf(person1) //true
+            - `Person.prototype.isPrototypeOf(person1) //true`
         * `Object.getPrototypeOf()`
-            - Object.getPrototypeOf(person1) == Person.prototype //true
+            - `Object.getPrototypeOf(person1) == Person.prototype //true`
         * 原型搜索机制
             - 原理：对象实例共享原型所保存的属性和方法
             - 当读取某个对象的某个属性时
                 + 首先会搜索对象实例本身，如果找到给定的属性或方法名，则返回
                 + 若没找到，则对对象实例的原型对象进行第二次搜索，如果找到，则返回
         * `hasOwnProperty()`：检测一个属性是在实例中还是在原型中。该方法继承自Object
-            - person1.hasOwnProperty("name")    //false  表示属性在原型中
+            - `person1.hasOwnProperty("name")    //false  表示属性在原型中`
     + 原型与in操作符
         * `in`：无论是实例本身还是原型的属性，只要能访问就为true
-            - "name" in person  //true
+            - `"name" in person  //true`
         * `for-in`:返回的是所有可通过对象访问的，enumerated的属性
             - 包括存在于实例的属性，也包括存在与原型的属性
             - 会屏蔽原型中不可枚举的属性(即[[enumerable]]设置为false的属性)，但实例属性覆盖该原型属性后是可以的
             - 所有开发人员定义的属性都是可枚举的 
         * `Object.keys(原型对象)`:返回一个所有可枚举属性的字符串数组
-            - Object.keys(Person.prototype)     //name,age,job,sayName
+            - `Object.keys(Person.prototype)     //name,age,job,sayName`
         * `Object.getOwnPropertyNames(原型对象)`：返回所有属性的字符串数组
-            - Object.getOwnPropertyNames(Person.prototype)  //constructor,name,age,job,sayName
+            - `Object.getOwnPropertyNames(Person.prototype)  //constructor,name,age,job,sayName`
     + 对象字面量方式重写原型对象
         * 重写原型就切断了现有实例与新原型的联系
         * 新原型的`constructor`不再指向`Person`,而是`Object`。因为重写了原型对象，这个原型就是Object的实例，它的constructor属性也就指向了最顶层Object
@@ -268,7 +344,7 @@
         * 解决方法
             - 对象字面量中加一条`constructor : Person,`。但是会产生一个新的问题：constructor变成可枚举的属性。
             - `Object.defineProperty`
-            ```
+            ```javascript
             Object.defineProperty(Person.prototype, "constructor", {
                 enumerable : fasle,
                 value : Person
@@ -295,7 +371,7 @@
         * 共享着方法的引用，最大限度节省内存
 - 动态原型模式
     + 把所有信息都封装在构造函数中，而仅在必要的情况下(第一次被调用时)通过在构造函数中初始化原型
-    ```
+    ```javascript
     if (typeof this.sayName != "Function"){//语句检查可以是任何属性或方法
         Person.prototype.sayName = Function(){//不要用对象字面量方式重写原型对象
             return this.name;
@@ -318,7 +394,6 @@
         * 新创建对象的实例方法不引用this
         * 不使用new操作符调用构造函数
 
-<a id="继承"></a>
 ### 继承
 - 原型链:实现继承的主要方法
     + 基本思路：利用原型让一个引用类型继承另一个引用类型的属性和方法
@@ -349,7 +424,7 @@
         * 一次是在子类型构造函数内部继承实例属性
 - 原型式继承
     + 基本思路：借助原型基于 **已有的对象**创建新对象(克隆)
-    ```
+    ```JavaScript
     function object(o){
         function F(){}      //新建一个临时性的构造函数
         F.prototype = o;    //将传入的对象作为这个构造函数的原型对象，这里只是浅复制了传入对象o的指针。意思就是这个对象o是外部共享的
@@ -362,7 +437,7 @@
     + 使用场景：想让一个对象和另一个对象保持类似时
 - 寄生式继承
     + 基本思路：和寄生构造函数和工厂模式类似，创建一个仅用于封装继承过程的函数
-    ```
+    ```JavaScript
     function createAnother(origObj){
         var cloneObj = object(origObj);
         cloneObj.sayHi = function(){
@@ -374,7 +449,7 @@
     + 使用场景：主要考虑的是对象而不是自定义类型和构造函数时
 - 寄生组合式继承
     + 基本思路：通过借用构造函数来继承属性，通过原型链的混成形式来继承方法，直接将超类型的原型赋值给子类型的原型，而不是将超类型的实例赋值给子类型原型
-    ```
+    ```JavaScript
     function inheirtPrototype(SubType, SuperType){
         var cloneSuperPrototype = create(SuperType.prototype);//创建对象
         cloneSuperPrototype.contructor = SubType;   //增强对象
@@ -383,8 +458,7 @@
     ```
     + 最理想的继承范式
 
-<a id="函数表达式"></a>
-## 函数表达式
+## 7.函数表达式
 - 定义函数
     + 函数声明
         * FSCO四大浏览器定义了name属性 `fun.name == 'fun'`
@@ -394,7 +468,7 @@
         * 和其他表达式一样，使用前必须先赋值，不存在变量提升
     + 命名函数表达式
         * 严格模式下，不能通过脚本访问arguments.callee时，可在递归函数中使用
-        ```
+        ```JavaScript
         "use strict"
         var factorial = (
             function f(n){
@@ -406,11 +480,10 @@
         * 将函数赋值给另一个变量，函数名字f仍然有效。在严格模式和非严格模式都可以
         * 此时name属性指向f而不是factorial
 
-<a id="递归"></a>
 ### 递归
 - 递归函数是一个通过名字调用自身的函数
 - 通过名字递归的问题
-    ```
+    ```JavaScript
     var anotherFactorial = factorial;   //factorial为递归方法实现的阶乘函数
     factorial = null;
     anotherFactorial(4);    //此时函数内部的facotorial(3)已经不再能执行了
@@ -418,7 +491,6 @@
 - `arguments.callee`：一个指向正在执行的函数的指针
 - 严格模式下，使用命名函数表示来达成相同的效果
 
-<a id="闭包"></a>
 ### 闭包
 - 作用域链：指向变量对象的指针列表，只引用但不实际包含变量对象。保证对执行环境有权访问的所有变量和函数的有序访问
     + 作用域链的前端：始终都是当前执行的代码所在环境的变量对象
@@ -445,7 +517,7 @@
     + 全局函数中，this等于window
     + 当函数作为对象的方法调用时，this等于那个对象
     + 匿名函数的this指向window，因为匿名函数是全局执行环境
-    ```
+    ```JavaScript
     var name = "window"
     var obj = {
         name:'obj',
@@ -461,7 +533,7 @@
     + 闭包作用域链中不要保存HTML元素，不然该元素无法被销毁
     + 闭包会引用包含函数的整个活动对象
     + 在用完一个变量后，把它设为null
-     ```
+     ```JavaScript
      var element = document.getElementById("x");
      var id = element.id
      element.onclick = function(){
@@ -470,11 +542,10 @@
      element = null //解除对DOM对象的引用
      ```
 
-<a id="模仿块级作用域"></a>
 ### 模仿块级作用域
 - JavaScript没有块级作用域的概念
     + 变量提升
-    ```
+    ```JavaScript
     var name = 'jimmy'
     function a(){
     console.log(name)
@@ -488,7 +559,7 @@
         * i在循环结束后还会存在，因为i定义在for循环的包含函数的活动对象中
         * 即使在循环结束后重新声明i(var i)也没用，因为前面的i还在，会无视后续的声明
 - 匿名函数用作块级作用域(私有作用域)
-    ```
+    ```JavaScript
     (function(){
         //这是块级作用域，ES6后被let\const取代
     })()//函数表达式之后才能跟圆括号，比如f()
@@ -497,7 +568,6 @@
     + 这个匿名函数被用作块级作用域时会是一个闭包
     + 这种用法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用
 
-<a id="私有变量"></a>
 ### 私有变量
 - 任何函数中定义的变量，都可以认为是私有变量。私有变量包含函数的参数、局部变量、函数内部定义的其他函数
 - 公有方法：可以访问包含作用于中定义的变量的方法
@@ -511,12 +581,10 @@
     + 单例特权方法
 - 增强的模块模式
 
-<a id="bom"></a>
-## BOM
+## 8.BOM
 - ES是JavaScript的核心，BOM是web环境下JavaScript的核心
 - BOM提供了很多对象，用于访问浏览器的功能。这些功能与页面内容无关
 
-<a id="window对象"></a>
 ### Window对象
 - 概念
     + window对象是BOM的核心对象,表示浏览器的实例
@@ -527,7 +595,7 @@
         * `var`语句声明的全局变量不能通过delete操作符删除。因为使用`var`语句添加的`winodw`属性有一个名为`[[configurable]]`的特性，这个特性值被设置为false
     + 尝试访问未声明的变量会抛错，这时可以通过`window.unknowValue`查看该变量是否存在,未声明则值为undefined.
 - 窗口关系及框架
-    + <frame>标签已被新标准废弃，使用<iframe></iframe>
+    + `<frame>`标签已被新标准废弃，使用 `<iframe>`
     + 使用框架会使浏览器存在多个Global对象
     + `top`指向最高层的frame,即浏览器窗口window
     + `parent`指向当前frame的上层frame
@@ -536,12 +604,12 @@
     + `screenLeft`/`screenTop`IE、Safari、Opera、Chrome
     + `screenX`/`screenY`FireFox、Safari、Chrome
     + 跨浏览器取的窗口位置
-```
-    var winPosLeft = (typeof window.screenLeft == 'number') ? 
-                        window.screenLeft : window.screenX;
-    var winPosTop = (typeof window.screenTop == 'number') ? 
-                        window.screenTop : window.screenY;
-```
+    ```javascript
+        var winPosLeft = (typeof window.screenLeft == 'number') ? 
+                            window.screenLeft : window.screenX;
+        var winPosTop = (typeof window.screenTop == 'number') ? 
+                            window.screenTop : window.screenY;
+    ```
     + `moveTo(0,100)`窗口移动到新位置的xy值
     + `moveBy(0,100)`窗口向水平和垂直方向移动的像素值
         * 默认被禁用，不适用于frame，只能对最外层window对象使用
@@ -605,7 +673,6 @@
     + `window.print()`弹出打印对话框
     + `window.find()`弹出查找对话框
 
-<a id="location对象"></a>
 ### location对象
 - 概念
     + 最有用的BOM对象之一
@@ -632,19 +699,16 @@
         * `location.reload(true)`强制从服务器重新加载
         * 最好将reload放在代码最后一行
 
-<a id="navigator对象"></a>
 ### navigator对象
 - 用来识别客户端浏览器的事实标准，navigator对象的属性通常用于检测显示页面的浏览器类型
 - 检测插件
     + `navigator.plugins[]`
 - 注册处理程序
 
-<a id="screen对象"></a>
 ### screen对象
 - 用来表明客户端的能力
     + 浏览器窗口外部的显示器的信息
 
-<a id="history对象"></a>
 ### history对象
 - 保存着用户上网的历史记录,无法得知用户浏览过的URL
 - `history.go()`
@@ -655,10 +719,12 @@
 - `history.forward()`前进一页
 - `hsitory.length`历史记录的数量
 
-<a id="dom"></a>
-## DOM
+## 9.客户端检测(检测是啥浏览器)
+### 能力监测
+### 怪癖检测
+### 用户代理检测
 
-<a id="节点层次"></a>
+## 10.DOM
 ### 节点层次
 - Node类型
 - Document类型
@@ -670,29 +736,57 @@
 - DocumentFragment类型
 - Attr类型
 
-<a id="dom操作技术"></a>
 ### DOM操作技术
 - 动态脚本
 - 动态样式
 - 操作表格
 - 使用NodeList
 
-<a id="dom拓展"></a>
-## DOM拓展
+## 11.DOM拓展
 ### 选择符API
 ### 元素遍历
 ### HTML5
 ### 专有扩展
-## DOM2和DOM3
+
+## 12.DOM2和DOM3
 ### DOM变化
 ### 样式
 ### 遍历
 ### 范围
 
+## 13.事件
+### 事件流
+- 事件冒泡
+- 事件捕获
+- DOM事件流
+### 事件处理程序
+- HTML事件处理程序
+- DOM0级事件处理程序
+- DOM2级事件处理程序
+- IE事件处理程序
+- 跨浏览器的事件处理程序
+### 事件对象
+- DOM中的事件对象
+- IE中的事件对象
+- 跨浏览器的事件对象
+### 事件类型
+- UI事件
+- 焦点事件
+- 鼠标与滚轮事件
+- 键盘与文本事件
+- 复合事件
+- 变动事件
+- HTML5事件
+- 设备事件
+- 触摸与手势事件
+### 内存和性能
+- 事件委托
+- 移除事件处理程序
+### 模拟事件
+- DOM中的事件模拟
+- IE中的事件模拟
 
-<a id="json"></a>
-## Json
-<a id="语法"></a>
+## 20.Json
 ### 语法
 - 简单值
     + 使用与JavaScript相同的语法，可以在Json中表示字符串、数值、布尔值和null。
@@ -703,63 +797,57 @@
     + 数组也是一种复杂数据类型，表示一组有序的值的列表，可以通过数值索引来访问其中的值。数组的值也可以是任意类型————简单值、对象或数组
     + JSON不支持变量、函数或对象实例，它就是一种表示结构化数据的格式，虽然与JavaScript中表示数据的某些语法相同，但它并不局限于JavaScript的范畴。
 
-<a id="简单值"></a>
 #### 简单值
 - 数值：5
 - 字符串："Hello world!"
     + JSON字符串必须使用双引号，单引号会导致语法错误
 - 布尔值和null也是有效的JSON形式
 
-<a id="对象"></a>
 #### 对象
 - Javascript中的对象字面量：
-```Javascript
-        var person = {
-            name: "Nicholas",
-            age: 29
-        };
-```
+    ```Javascript
+            var person = {
+                name: "Nicholas",
+                age: 29
+            };
+    ```
 - JSON表示上述对象的方式如下
-```JSON
-        {
-            "name": "Nicholas",
-            "age": 29
-        }
-```
+    ```JSON
+            {
+                "name": "Nicholas",
+                "age": 29
+            }
+    ```
 - 与Javascript的对象字面量相比，JSON对象有两个地方不一样
     + 首先，没有声明变量(JSON中没有变量的概念)
     + 其次，没有末尾的分号
 
-<a id="数组"></a>
 #### 数组
 - JavaScript中的数组字面量
     + var values = [25,"h1",true];
 - JSON中
     + [25,"h1",true]
 
-<a id="解析与序列化"></a>
 ### 解析与序列化
-<a id="json对象"></a>
 #### JSON对象
 - 早期的JSON解析器基本上就是使用JavaScript的eval()函数。由于JSON是JavaScript语法的子集，因此eval()函数可以解析、解释并返回JavaScript对象和数组
 - JSON对象有两个方法
     + stringify()和parse()
     + 在最简单的情况下，这两个方法分别用于把JavaScript对象序列化为JSON字符串和JSON字符串解析为原生JavaScript值
-```Javascript
-        var book = {
-            title: "Professional JavaScript",
-            authors: [
-                "Nicholas C. Zakas"
-            ],
-            edition: 3,
-            year: 2011
-        };
+    ```Javascript
+            var book = {
+                title: "Professional JavaScript",
+                authors: [
+                    "Nicholas C. Zakas"
+                ],
+                edition: 3,
+                year: 2011
+            };
 
-        var jsonText = JSON.stringify(book);
-        var bookCopy = JSON.parse(jsonText);
-```
+            var jsonText = JSON.stringify(book);
+            var bookCopy = JSON.parse(jsonText);
+    ```
 
-<a id="序列化选项"></a>
 #### 序列化选项
 - JSON.stringify()除了要序列化的JavaScript对象外，还可以接收另外两个参数，这两个参数用于指定以不同的方式序列化JavaScript对象
     + 过滤器：可以是一个数组，也可以是一个函数
@@ -857,50 +945,89 @@
                 console.log(bookCopy.releaseDate.getFullYear());
     ```
 
-<a id="ajax与comet"></a>
-## Ajax与Comet
-<a id="xmlhttprequest对象"></a>
+## 21.Ajax与Comet
 ### XMLHttpRequest对象
-    ```Javascript
-    function createXHR(){
-        if(typeof arguments.callee.activeXString != "string"){
-            var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0",
-                            "MSXML2.XMLHttp"],
-                            i,len;
-            for(i=0, len=version.length; i<len; i++){
-                try{
-                    new ActiveXObject(version[i]);
-                    arguments.callee.activeXString = version[i];
-                    break;
-                } catch (ex){
 
-                }
+```javascript
+function createXHR(){
+    if(typeof arguments.callee.activeXString != "string"){
+        var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0",
+                        "MSXML2.XMLHttp"],
+                        i,len;
+        for(i=0, len=version.length; i<len; i++){
+            try{
+                new ActiveXObject(version[i]);
+                arguments.callee.activeXString = version[i];
+                break;
+            } catch (ex){
+
             }
         }
-        return new ActiveXObject(arguments.callee.activeXString);
     }
-    ```
+    return new ActiveXObject(arguments.callee.activeXString);
+}
+```
+- XHR的用法
+  - open(),它接受3个参数
+      + 要发送的请求的类型
+      + 请求的URL:相对于执行代码的当前页面(也可以使用绝对路径)
+      + 表示是否异步发送请求的布尔值
+      + `xhr.open("get", "example.php", false)`
+          * open()方法并不会真正发送请求，而只是启动一个请求以备发送。
+          * 只能向同一个域中使用相同端口和协议的URL发送请求。如果URL与启动请求页面有任何差别，都会引发安全错误
+      ```
+      xhr.open("get", "example.txt", false);
+      xhr.send(null)
+      ```
+  - send()，接收一个参数，
+     + 即要作为请求主题发送的数据。如果不需要通过请求主题发送数据，则必须传入null，因为这个参数对有些浏览器来说是必需的。调用send()之后，请求就会被分派到服务器。
+     + 收到响应后，响应的数据会自动填充XHR对象的属性，相关的属性简介如下
+         * `responseText`：作为响应主体被返回的文本
+         * `responseXML`：如果响应的内容类型是"text/xml"或"application/xml",这个属性中将保存着响应数据的XML DOM 文档
+         * `status`：响应的HTTP状态
+         * `statusText`：HTTP状态的说明
 
-<a id="xhr的用法"></a>
-#### XHR的用法
-- open(),它接受3个参数
-    + 要发送的请求的类型
-    + 请求的URL:相对于执行代码的当前页面(也可以使用绝对路径)
-    + 表示是否异步发送请求的布尔值
-    + xhr.open("get", "example.php", false)
-        * open()方法并不会真正发送请求，而只是启动一个请求以备发送。
-        * 只能向同一个域中使用相同端口和协议的URL发送请求。如果URL与启动请求页面有任何差别，都会引发安全错误
-    `
-    xhr.open("get", "example.txt", false);
-    xhr.send(null)
-    `
-- send()，接收一个参数，
-   + 即要作为请求主题发送的数据。如果不需要通过请求主题发送数据，则必须传入null，因为这个参数对有些浏览器来说是必需的。调用send()之后，请求就会被分派到服务器。
-   + 收到响应后，响应的数据会自动填充XHR对象的属性，相关的属性简介如下
-       * responseText：作为响应主体被返回的文本
-       * responseXML：如果响应的内容类型是"text/xml"或"application/xml",这个属性中将保存着响应数据的XML DOM 文档
-       * status：响应的HTTP状态
-       * statusText：HTTP状态的说明
+- HTTP头部信息
+- GET请求
+- POST请求
+### XMLHttpRequest 2级
+- FormData
+- 超时设定
+- overrideMimeType()方法
+### 进度事件
+- load事件
+- progress事件
+### 跨域资源共享
+- IE对CORS的实现
+- 其他浏览器对CORS的实现
+- Preflighted Requests
+- 带凭据的请求
+- 跨浏览器的CORS
+### 其他跨域技术
+- 图像Ping
+- JSONP
+- Comet
+- 服务器发送事件
+- Web Sockets
+- SSE与Web Sockets
+### 安全
 
-`
-`
+## 22.高级技巧
+### 高级函数
+### 防篡改对象
+### 高级定时器
+### 自定义事件
+### 拖放
+
+## 23.离线应用与客户端存储
+### 离线监测
+### 应用缓存
+### 数据存储
+- Cookie
+- IE用户数据
+- Web存储机制
+- IndexedDB
+## 24.最佳实践
+### 可维护性
+### 性能
+### 部署
