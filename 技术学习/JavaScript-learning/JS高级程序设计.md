@@ -126,6 +126,10 @@
 ### 变量
 ### 数据类型
 - typeof操作符
+  - 用来检测变量的数据类型
+  - typeof null //object
+  - typeof (new RegExp())  //object,chrome7之前返回function
+  - typeof()可以使用，但不必要，typeof是操作符不是函数
 - undefined
 - null
 - boolean
