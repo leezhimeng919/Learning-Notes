@@ -127,15 +127,146 @@
 ### 数据类型
 - typeof操作符
   - 用来检测变量的数据类型
-  - typeof null //object
-  - typeof (new RegExp())  //object,chrome7之前返回function
-  - typeof()可以使用，但不必要，typeof是操作符不是函数
-- undefined
-- null
-- boolean
-- number
-- string
-- object
+  - `typeof null //object`
+  - `typeof (new RegExp())  //object,chrome7之前返回function`
+  - `typeof()可以使用，但不必要，typeof是操作符不是函数`
+- Undefined类型
+  - undefined类型只有一个值`undefined`
+  - 声明变量但未初始化会默认为变量赋值`undefined`，只要值是`undefined`，他的`typeof`就是`undefined`
+  - 未声明的变量只能执行一项操作`typeof`，结果为`undefined`，也可以执行delete，但无意义
+- Null类型
+  - null类型只有一个值`null`，表示一个空对象指针
+  - undefined == null //true
+  - 在还不知道为一个变量声明时初始化什么值时，可以初始化为null
+  - null和undefined本质上是不同的，语义不同
+- Boolean类型
+  - 只有`true`和`false`两个值
+  - 所有类型的值都有与这两个布尔值等价的值，可以通过`Boolean()`转换，任何类型都可以调用这个函数
+  - 转换规则
+    |数据类型|true|false|
+    |:--:|:--:|:--:|
+    |String|任何非空字符串|""（空字符串）|
+    |Number|任何非零数值(包括无穷大)|0和NaN|
+    |Object|任何对象|null|
+    |Undefined|N/A|undefined|
+  - 流控制语句自动执行相应的布尔转换 
+- Number类型
+  - 使用IEEE754格式表示整数和字符串
+  - 数值字面量格式
+    - 八进制：0开头，每位在0-7之间，否则按十进制解析
+    - 十六进制：0x开头，每位在0-9，A-F之间，否则报错
+    - +0 == -0 //true
+    - 十进制：默认
+  - 浮点数值
+    - `.0 == 0.1`
+    - `1. == 1`浮点数占空间是数值的两倍，所以会最大程度的把浮点数转换成整数
+    - `1.0 == 1`浮点数本身是整数会被转换成整数
+    - `e`科学计数法
+    - 浮点数的最高精度是17位，所以0.1+0.2=0.30000000000000004(15个0，小数点后17位)
+  - 数值范围
+    - Number.MIN_VALUE: 5e-324
+      - `Number.MIN_VALUE - Number.MIN_VALUE == 0`
+      - `Number.MIN_VALUE - Number.MAX_VALUE == - Number.MAX_VALUE`
+      - `Number.MIN_VALUE + Number.MIN_VALUE == 1e-323`
+      - `Number.MIN_VALUE + Number.MAX_VALUE == Number.MAX_VALUE`
+      - `Number.MIN_VALUE + 任何非零数 == 该非零数`
+    - Number.MAX_VALUE: 1.7976931348623157e+308
+      - `Number.MAX_VALUE - Number.MAX_VALUE == 0`
+      - `Number.MAX_VALUE - Number.MIN_VALUE == Number.MAX_VALUE`
+      - `Number.MAX_VALUE + Number.MAX_VALUE == Infinite`
+      - `Number.MAX_VALUE + Number.MIN_VALUE == Number.MAX_VALUE`
+      - `Number.MIN_VALUE + 任何非零数 == Number.MAX_VALUE
+    - Number.NEGATIVE_INFINITE: -Infinite
+      - `Number.NEGATIVE_INFINITE + Number.POSITIVE_INFINITE == NaN`
+    - Number.POSITIVE_INFINITE: Infinite
+    - isFinite()：用来检查数值是否有限
+  - NaN
+    - Not a Number,表示本来要返回数值的操作数未返回数值，是一个特殊的数值
+    - 任何涉及NaN的操作都会返回NaN
+    - NaN与任何值都不相等`NaN == NaN //false`
+    - isNaN(),传入所有不能转换成数值的值和NaN会返回true
+  - 数值转换
+    - 三个函数可以把非数值转成数值：`Number()`、`parseInt()`、`parseFloat()`
+    - Number()
+      - 传入布尔，1和0
+      - 传入数值，根据数值格式输出数值
+      - 传入null，返回0
+      - 传入undefined，返回NaN
+      - 传入字符串
+        - 字符串中只包含数值和无意义的空格，返回数值的十进制
+        - 字符串中包含有效浮点格式，返回对应的浮点数值
+        - 字符串以0x开头的有效十六进制格式，返回对应的十进制整数
+        - 字符串为空，返回0
+        - 字符串中包含其他字符，返回NaN
+      - 传入对象
+        - 首先调用对象的`ValueOf()`方法，然后依照前面的规则转换返回值，如果结果是NaN，则调用对象的`toString()`方法，然后依照前面的规则转换返回的字符串
+      - Number()与一元加操作符的操作相同，即`+true == 1`
+    - parseInt() 
+      - 会忽略字符串前面的空格，知道找到第一个非空格字符，若第一个字符不是数字或符号，则返回NaN
+        - parseInt("   1") == Number("   1")
+      - 会一直解析直到遇到非数值
+        - parseInt("1.2") == 1
+        - parseInt("123bl") == 123
+        - parseInt("0x) == NaN
+      - 第二个参数，传入基数表示数字格式
+        - parseInt("70",8) //56 ，可忽略0开头
+        - 建议无论在何时都传入基数，默认10
+    - parseFloat()
+      - 解析直到第一个无效浮点数字符，可返回整数
+      - 没有第二个参数
+        - 传入十六进制，返回0，因为到x就认定无效了
+        - 当有效数字不止一个0的时候忽略前置0，只解析十进制
+- String类型
+  - 由0或多个16位Unicode字符组成的字符序列，用`""`或`''`表示
+  - 字符字面量
+    - 转义序列
+      - `\n` ：n表示newline，换行
+      - `\t` ：t表示table，就是一个tab的缩进
+      - `\b` ：b表示backspace，就是退格
+      - `\r` ：r表示return，回车
+      - `\f` ：f表示formfeed，进纸
+      - `\\` ：斜杠
+      - `\'` ：单引号
+      - `\"` ：双引号
+      - `\xnn` ：n表示十六进制，表示一个字符
+        - \x41 : A
+      - `\unnnn` ：n表示十六进制，表示一个Unicode字符，六个字符长，表示一个字符
+        - \u03a3 : sigma
+        - '\u03a3'.lenght == 1
+    - 字符长度
+      - 转义序列无论多长，只占一位
+  - 字符串特点
+    - 字符串一旦创建就不可改变
+    - 要改变保存字符串的变量，直接将变量指向一个新字符串，旧的字符串会被销毁
+  - 转换为字符串
+    - 两种方式把一个值转为字符串：`toString()`和`String()`
+    - toString()
+      - 数值、字符串、对象、布尔值都有toString()方法
+        - null和undefined没有
+        - 字符串也有，返回该字符串的一个副本
+      - 传参
+        - 数值调用toString()时，传入一个基数，来表示数值转换的进制数，默认十进制
+        - `var a = 10 ; a.toString(2) //"1010"`
+    - String()
+      - 能将任何类型的值转换为字符串
+      - 转换规则
+        - 如果值由toString()方法，则调用该方法，不传参
+        - 如果值是null，返回'null'
+        - 如果值是undefined，返回'undefined'
+    - 数字转字符串简单方法
+      - `num + ""`
+    - 纯数字的字符串转数字
+      - `+str`
+- Object类型
+  - 一组数据和功能的集合
+  - 每个对象实例都具有的属性和方法
+    - `constructor`
+    - `hasOwnProperty(prototypeName)`
+    - `isPrototypeOf(object)`
+    - `prototypeIsEnumberable(prototypeName)`
+    - `toLocalString()`返回对象的字符串表示，跟执行环境相关
+    - `toString()`返回对象的字符串表示。`￥￥￥`
+    - `valueOf()`
 ### 操作符
 >主要分四大类：算数运算符、位运算符、关系操作符、相等操作符
 <br>ES中的操作符不同之处在于能够适用于多种类型的值，在应用对象时，会调用对象的valueOf或toString
