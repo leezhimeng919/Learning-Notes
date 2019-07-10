@@ -279,13 +279,31 @@
     - `+num`
     - `-num`
 - 位操作符
+  - 二进制补码
+    - 传统三步法
+      - 绝对值的二进制码
+      - 反码
+      - 反码+1
+    - JavaScript输出负数
+      - 绝对值的二进制码
+      - 前面加个负号
+  - 位操作符
+    - ES中对数值使用位操作符会将64位的数值转换成32位，进行位运算，最后转换回64位
+    - NaN和Infinity被当做0来处理，对非数值进行位运算会先进行Number()chuli 
   - 按位非(NOT) `~`
+    - `num == - ( ~ num + 1)`
   - 按位与(AND) `&`
   - 按位或(OR) `|`
   - 按位异或(XOR) `^`
+    - `(num1 ^ num2) == (num1 | num2) - (num1 & num2)`
   - 左移 `<<`
+    - 所有位数左移，腾出的空位用0补充，不会影响符号位，除非移到了第32位，超出32位为0
   - 有符号的右移 `>>`
+    - 符号位不动，其他位右移，腾出位用符号位的值来填充(负数用1填充，正数用0填充)
   - 无符号的右移 `>>>`
+    - 32位整体右移
+    - 正数，与>>相同
+    - 负数，腾出位用0填充
 - 布尔操作符
   - 逻辑非 `!`
   - 逻辑与 `&&`
@@ -325,8 +343,13 @@
 - with语句
 - switch语句
 ### 函数
-- 理解函数
+- 理解参数
+  - arguments对象
+    - 是一个类数组，不是Array的实例
+      - arguments[],可以为空，所以ES的函数参数非必要
+      - arguments.length
 - 没有重载
+  - 后面的声明会覆盖前面的声明
 
 ## 4.变量、作用域和内存问题
 ### 基本类型和引用类型的值
@@ -370,11 +393,39 @@
 
 
 ### 垃圾收集
-- 标记清除
+- 原理：找出不再使用的变量(打上记号)，然后周期性地释放其占用的内存。
+- 标记清除(最主流)
+  - 当变量进入环境时，为这个变量标记为“进入环境”，当变量离开环境时，则将其标记为“离开环境”
+  - 如何标记不重要，关键在于采取什么策略
+  - 垃圾收集器工作
+    - 给存储在内存中的所有变量加上标记(加上进入环境的标签)
+    - 去掉环境中的变量以及被环境中变量引用的变量的标记(摘掉进入环境的标签)
+    - 环境中无法访问的变量加上标签(加上离开环境的标签)
+    - 内存清除，销毁哪些带标签的值并回收他们所占用的内存空间
 - 引用计数
+  - 原理：跟踪记录每个值被引用的次数
+  - 步骤：
+    - 变量被声明时并被赋值一个引用类型值时，+1，该引用类型被赋值给另一个变量，+1
+    - 包含这个引用的变量又取得另一个值，-1，
+    - 当引用次数为0时，则可以销毁了
+  - 引用计数的问题
+    - 循环引用会导致次数永不为0，例如IE的DOM
+  - 手动解决方案
+    - 为了避免循环引用，赋值为null，手动解除引用
+  - 内存泄露
+    - 使用引用计数的垃圾清理机制会存在的问题，就是已经不再用到的内存，没有及时释放(次数不为0)
 - 性能问题
+  - IE是通过动态修改几个字面量的临界值的方式来触发垃圾收集器
+    - 256个变量
+    - 4096个对象
+    - 64kb字符串
+    - 触发任一临界值便会触发，定死临界值可能会频繁触发回收。所以需要动态修改临界值
+  - 当垃圾收集例程回收的内存分配量低于15%(每次回收的内存占比不大，说明总是被清除)，上面的临界值加倍
+  - 当垃圾收集例程回收的内存分配量达到85%(每次回收的内存占比大，说明很久没被清除)，临界值重置默认值
 - 管理内存
-
+  - 一旦数据不再有用，最好通过设置为null来释放引用，这个方法叫解除引用
+    - **解除引用**并不是直接释放内存，而是方便垃圾收集器下次运行时将他带走
+  - 局部变量会在他们离开执行环境时自动被解除引用
 
 ## 5.引用类型
 - 引用类型是一种数据结构，用于将数据和功能组织到一起。比如Array.push()，Array是数组，push是为数组增加元素的功能。
@@ -384,6 +435,17 @@
 ### Object类型
 
 ### Array类型
+- 检测数组
+  - instanceof操作符
+  - Array.isArray(value)
+- 转换方法
+- 栈方法
+- 队列方法
+- 重排序方法
+- 操作方法
+- 位置方法
+- 迭代方法
+- 归并方法
 ### Date类型
 ### RegExp类型
 ### Function类型
@@ -890,16 +952,109 @@
 ### 范围
 
 ## 13.事件
+>可以使用监听器(或处理程序)来预订事件，是一种观察员模式的模型，支持页面行为和页面外观的松耦合
 ### 事件流
-- 事件冒泡
-- 事件捕获
+>描述从页面接收事件的顺序。IE的事件流是事件冒泡流，而网景的事件流是事件捕获流
+- 事件冒泡event bubbling
+  - 事件开始时由最具体的元素接收(按钮)，然后逐级向上传播到较为不具体的节点(document)
+  - 所有现代浏览器都支持事件冒泡，IE9、Safari、Chrome、Firefox将事件一直冒泡到window
+- 事件捕获event capturing
+  - 最先由不具体的节点接收到事件，具体的元素最后收到事件
+  - 目的：在事件到达目标节点之前捕获他
+  - 上述浏览器也都支持这种事件流模型，从window对象开始捕获事件
 - DOM事件流
+  - 三个阶段：事件捕获阶段(截获)、处于目标阶段(接收)、事件冒泡阶段(响应)
+  - 上述浏览器及更高版本都会在捕获阶段触发事件对象上的时间。所以捕获阶段、目标阶段都能操作事件
 ### 事件处理程序
+>响应某个事件的函数就叫做事件处理程序或事件监听器，通常以'on'开头，区别于事件名
 - HTML事件处理程序
+  - 使用与事件处理程序同名的属性来指定,属性值是可以被执行的JavaScript代码，可以是外部代码
+    ```html
+    <input type="button" value="Click Me" onclick="showMessage()">
+    ```
+  - 注意
+    - 存在一个局部变量event
+    - this指定的是这个input元素
+  - 缺点
+    - 存在一个时差问题：在解析外部JavaScript代码之前就点击了按钮，会引发错误,解决方案如下
+    ```html
+    <input type="button" value="Click Me" onclick="try{showMessage();}catch(ex){}">
+    ```
+    - HTMl和JavaScript代码耦合
+    - 受不同浏览器环境影响
 - DOM0级事件处理程序
+  - 将一个函数赋值给一个元素对象的引用的属性，属性名和事件处理程序同名
+    ```javascript
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function(){
+        //
+    }
+    ```
+  - 优势
+    - 简单
+    - 跨浏览器
+  - 删除事件
+    - `btn.onclick = null;`
 - DOM2级事件处理程序
+  - 定义了两种方法来处理事件：addEventListener()、removeEventListener()
+  - 参数
+    - 第一个参数：要处理的事件名
+    - 第二个参数：作为事件处理程序的函数
+    - 第三个参数：布尔值，true表示捕获阶段调用函数；false表示冒泡阶段调用函数
+      - 除非想在事件到达目标之前捕获事件，不然不用true
+    ```javascript
+    function handler(){
+        return this.id
+    }
+    function handler2(){
+        return '2'
+    }
+    var btn = document.getElementById("myBtn");
+    btn.addEventListener('click', handler, false)
+    btn.addEventListener('cilck', handler2, false)//可以添加两个不同的click事件
+    btn.removeEventListener('click', handler, false)//删除事件监听
+    ```
 - IE事件处理程序
+  - 实现了与DOM类似的两个方法：attachEvent()、detachEvent()
+  - 参数
+    - 第一个参数：事件处理程序名(带'on-'的)
+    - 第二个参数：事件处理程序函数
+  - 和DOM事件处理程序的差异
+    - this指向window，DOM指向元素引用
+    - 添加两个事件时，顺序是后添加的先执行，DOM是代码顺序执行
+  - 支持IE事件处理程序的有IE和Opera
 - 跨浏览器的事件处理程序
+  - 手写一个兼容各个浏览器的事件处理程序，三类：DOM2级、DOM0级、IE
+  ```javascript
+  var EventUtil = {
+      addHandler:function(ele, type, fun) {
+          if(ele.addEventListener){
+              ele.addEventListener(type, fun, false);
+          } else if (ele.attachEvent) {
+              ele.attachEvent("on" + type, fun);
+          } else {
+              ele["on"+type] = fun;
+          }
+      },
+      removeHandler:function(ele, type, fun){
+          if(ele.removeEventListener){
+              ele.removeEventListener(type, fun, false);
+          }else if(ele.detachEvent){
+              ele.detachEvent("on"+type, fun);
+          }else{
+              ele["on"+type] = null;
+          }
+      }
+  }
+
+  var btn = document.getElementById('myBtn');
+  function handler() {
+      return '1'
+  };
+  EventUtil.addHandler(btn, 'click', handler);
+  EventUtil.removeHandler(btn, 'click', handler);
+  ```
+  - 现在几乎已经全部支持DOM2级事件了
 ### 事件对象
 - DOM中的事件对象
 - IE中的事件对象
